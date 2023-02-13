@@ -1,0 +1,24 @@
+modLoader="javafml" #mandatory
+loaderVersion="[41,)"
+license="All rights reserved"
+
+[[mods]]
+	modId="femalevillagers"
+	version="1.1"
+	displayName="Female Villagers"
+	authors="Daripher"
+	description='''Adds female villagers'''
+
+[[dependencies.femalevillagers]]
+    modId="forge"
+    mandatory=true
+    versionRange="[41,)"
+    ordering="NONE"
+    side="BOTH"
+    
+[[dependencies.femalevillagers]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19,1.20)"
+    ordering="NONE"
+    side="BOTH"

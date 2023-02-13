@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_17",
+  "package": "daripher.femalevillagers.mixin",
+  "mixins": [
+  	"MixinVillagerMakeLove",
+  	"MixinZombieVillager"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "femalevillagers.refmap.json"
+}
