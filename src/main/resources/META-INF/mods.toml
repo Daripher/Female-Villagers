@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[41,)"
+loaderVersion="[40,)"
 license="All rights reserved"
 
 [[mods]]
@@ -12,13 +12,13 @@ license="All rights reserved"
 [[dependencies.femalevillagers]]
     modId="forge"
     mandatory=true
-    versionRange="[41,)"
+    versionRange="[40,)"
     ordering="NONE"
     side="BOTH"
     
 [[dependencies.femalevillagers]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19,1.20)"
+    versionRange="[1.18.2,1.19)"
     ordering="NONE"
     side="BOTH"

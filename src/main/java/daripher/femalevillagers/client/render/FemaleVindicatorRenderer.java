@@ -17,7 +17,7 @@ public class FemaleVindicatorRenderer extends IllagerRenderer<FemaleVindicator> 
 
 	public FemaleVindicatorRenderer(EntityRendererProvider.Context context) {
 		super(context, new IllagerModel<>(context.bakeLayer(FemaleIllagerModel.LAYER_LOCATION)), 0.5F);
-		addLayer(new ItemInHandLayer<FemaleVindicator, IllagerModel<FemaleVindicator>>(this, context.getItemInHandRenderer()) {
+		addLayer(new ItemInHandLayer<FemaleVindicator, IllagerModel<FemaleVindicator>>(this) {
 			public void render(PoseStack p_116352_, MultiBufferSource p_116353_, int p_116354_, FemaleVindicator entity, float p_116356_, float p_116357_,
 					float p_116358_, float p_116359_, float p_116360_, float p_116361_) {
 				if (entity.isAggressive()) {

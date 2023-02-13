@@ -14,7 +14,7 @@ public class FemaleEvokerRenderer extends IllagerRenderer<FemaleEvoker> {
 
 	public FemaleEvokerRenderer(EntityRendererProvider.Context context) {
 		super(context, new IllagerModel<>(context.bakeLayer(FemaleIllagerModel.LAYER_LOCATION)), 0.5F);
-		addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
+		addLayer(new ItemInHandLayer<>(this));
 		model.getHat().visible = true;
 	}
 

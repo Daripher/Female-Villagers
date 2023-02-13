@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class EntityInit {
-	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, FemaleVillagersMod.MOD_ID);
+	public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITIES, FemaleVillagersMod.MOD_ID);
 
 	public static final RegistryObject<EntityType<FemaleVillager>> FEMALE_VILLAGER = REGISTRY.register("female_villager", FemaleVillager::createEntityType);
 	public static final RegistryObject<EntityType<FemaleZombieVillager>> FEMALE_ZOMBIE_VILLAGER = REGISTRY.register("female_zombie_villager", FemaleZombieVillager::createEntityType);

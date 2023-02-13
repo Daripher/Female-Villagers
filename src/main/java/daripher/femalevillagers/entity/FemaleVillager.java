@@ -3,6 +3,7 @@ package daripher.femalevillagers.entity;
 import daripher.femalevillagers.FemaleVillagersMod;
 import daripher.femalevillagers.init.EntityInit;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.npc.Villager;
@@ -27,10 +28,10 @@ public class FemaleVillager extends Villager {
 
 	@Override
 	protected Component getTypeName() {
-		var professionId = ForgeRegistries.VILLAGER_PROFESSIONS.getKey(getVillagerData().getProfession());
+		var professionId = ForgeRegistries.PROFESSIONS.getKey(getVillagerData().getProfession());
 		var professionNamespace = !"minecraft".equals(professionId.getNamespace()) ? professionId.getNamespace() + '.' : "";
 		var professionName = professionNamespace + professionId.getPath();
-		return Component.translatable(EntityType.VILLAGER.getDescriptionId() + '.' + professionName);
+		return new TranslatableComponent(EntityType.VILLAGER.getDescriptionId() + '.' + professionName);
 	}
 
 	@Override

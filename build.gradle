@@ -1,7 +1,7 @@
 buildscript {
     repositories {
-        maven { url = 'https://maven.minecraftforge.net' }		
-        maven {
+        maven { url = 'https://maven.minecraftforge.net' }
+		maven {
             url = 'https://repo.spongepowered.org/repository/maven-public/'
             content { includeGroup "org.spongepowered" }
         }
@@ -16,14 +16,14 @@ buildscript {
 plugins {
     id 'eclipse'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '5.1.+'
 }
 
+apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
 version = '1.1'
 group = 'daripher.femalevillagers'
-archivesBaseName = 'FemaleVillagers-1.19.2'
+archivesBaseName = 'FemaleVillagers-1.18.2'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -33,7 +33,7 @@ mixin {
 }
 
 minecraft {
-    mappings channel: 'official', version: '1.19'
+    mappings channel: 'official', version: '1.18.2'
 
     runs {
         client {
@@ -84,8 +84,7 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-            args "-mixin.config=femalevillagers.mixins.json"
+            args '--mod', 'femalevillagers', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 femalevillagers {
@@ -102,8 +101,8 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19-41.1.0'
-	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.1.80'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 jar {
@@ -111,7 +110,7 @@ jar {
         attributes([
                 "Specification-Title"     : "femalevillagers",
                 "Specification-Vendor"    : "Daripher",
-                "Specification-Version"   : "1",
+                "Specification-Version"   : project.jar.archiveVersion,
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "Daripher",

@@ -16,14 +16,14 @@ import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.world.entity.monster.Vindicator;
 import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.npc.Villager;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = FemaleVillagersMod.MOD_ID)
 public class FemaleVillagerEvents {
 	@SubscribeEvent
-	public static void replaceVillagerWithFemaleVersion(EntityJoinLevelEvent event) {
+	public static void replaceVillagerWithFemaleVersion(EntityJoinWorldEvent event) {
 		if (event.getEntity().getTags().contains("do_not_replace")) {
 			return;
 		}
@@ -32,7 +32,7 @@ public class FemaleVillagerEvents {
 			return;
 		}
 
-		var level = event.getLevel();
+		var level = event.getWorld();
 		var replaceChance = 0.5;
 
 		if (level.random.nextFloat() >= replaceChance) {
