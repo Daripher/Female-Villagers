@@ -59,7 +59,7 @@ public class VillagerNamesCompatibility {
 			customFemaleNames = new ArrayList<>(Arrays.asList("Olivia", "Emma", "Charlotte"));
 		}
 	}
-	
+
 	public static void addCompatibility() {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(VillagerNamesCompatibility::initCustomFemaleNames);
 		MinecraftForge.EVENT_BUS.addListener(VillagerNamesCompatibility::setVillagerName);
@@ -100,8 +100,7 @@ public class VillagerNamesCompatibility {
 	}
 
 	private static boolean isFemaleEntity(Entity entity) {
-		return entity.getType() == EntityInit.FEMALE_VILLAGER.get() || entity.getType() == EntityInit.FEMALE_WANDERING_TRADER.get()
-				|| entity.getType() == EntityInit.FEMALE_ZOMBIE_VILLAGER.get();
+		return entity.getType() == EntityInit.FEMALE_VILLAGER.get() || entity.getType() == EntityInit.FEMALE_WANDERING_TRADER.get();
 	}
 
 	private static String getRandomName(boolean isFemale) {
