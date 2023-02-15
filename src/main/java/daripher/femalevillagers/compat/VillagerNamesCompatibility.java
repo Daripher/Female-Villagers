@@ -19,7 +19,6 @@ import com.natamus.collective_common_forge.functions.StringFunctions;
 import com.natamus.villagernames_common_forge.config.ConfigHandler;
 import com.natamus.villagernames_common_forge.util.Names;
 
-import daripher.femalevillagers.FemaleVillagersMod;
 import daripher.femalevillagers.init.EntityInit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.Villager;
@@ -27,11 +26,8 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
-@EventBusSubscriber(modid = FemaleVillagersMod.MOD_ID)
 public class VillagerNamesCompatibility {
 	private static List<String> customFemaleNames = null;
 
@@ -44,6 +40,22 @@ public class VillagerNamesCompatibility {
 		var isFemale = isFemaleEntity(event.getEntity());
 		var entityName = getRandomName(isFemale);
 		EntityFunctions.nameEntity(event.getEntity(), entityName);
+	}
+
+	@SubscribeEvent
+	public static void initCustomFemaleNames(FMLLoadCompleteEvent event) {
+		var configDirectoryPath = DataFunctions.getConfigDirectory() + File.separator + "villagernames";
+		var configDirectory = new File(configDirectoryPath);
+		var configFile = new File(configDirectoryPath + File.separator + "customfemalenames.txt");
+
+		if (configDirectory.isDirectory() && configFile.isFile()) {
+			var customNames = readCustomNames(configDirectoryPath);
+			customFemaleNames = Arrays.asList(customNames);
+		} else {
+			configDirectory.mkdirs();
+			writeCustomNames(configDirectoryPath);
+			customFemaleNames = new ArrayList<>(Arrays.asList("Olivia", "Emma", "Charlotte"));
+		}
 	}
 
 	private static boolean shouldHaveName(Entity entity) {
@@ -116,50 +128,32 @@ public class VillagerNamesCompatibility {
 		return StringFunctions.capitalizeEveryWord(name);
 	}
 
-	@EventBusSubscriber(modid = FemaleVillagersMod.MOD_ID, bus = Bus.MOD)
-	public static class ModEvents {
-		@SubscribeEvent()
-		public static void initCustomFemaleNames(FMLLoadCompleteEvent event) {
-			var configDirectoryPath = DataFunctions.getConfigDirectory() + File.separator + "villagernames";
-			var configDirectory = new File(configDirectoryPath);
-			var configFile = new File(configDirectoryPath + File.separator + "customfemalenames.txt");
+	private static String[] readCustomNames(String configDirectoryPath) {
+		String customNamesString = null;
 
-			if (configDirectory.isDirectory() && configFile.isFile()) {
-				var customNames = readCustomNames(configDirectoryPath);
-				customFemaleNames = Arrays.asList(customNames);
-			} else {
-				configDirectory.mkdirs();
-				writeCustomNames(configDirectoryPath);
-				customFemaleNames = new ArrayList<>(Arrays.asList("Olivia", "Emma", "Charlotte"));
-			}
+		try {
+			customNamesString = Files.readString(Paths.get(configDirectoryPath + File.separator + "customfemalenames.txt", new String[0]));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
-		private static String[] readCustomNames(String configDirectoryPath) {
-			String customNamesString = null;
-
-			try {
-				customNamesString = Files.readString(Paths.get(configDirectoryPath + File.separator + "customfemalenames.txt", new String[0]));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			customNamesString = customNamesString.replace("\n", "").replace("\r", "");
-			return customNamesString.split(",");
-		}
-
-		private static void writeCustomNames(String configDirectoryPath) {
-			PrintWriter writer = null;
-
-			try {
-				writer = new PrintWriter(configDirectoryPath + File.separator + "customfemalenames.txt", StandardCharsets.UTF_8);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			writer.println("Olivia,");
-			writer.println("Emma,");
-			writer.println("Charlotte");
-			writer.close();
-		}
+		customNamesString = customNamesString.replace("\n", "").replace("\r", "");
+		return customNamesString.split(",");
 	}
+
+	private static void writeCustomNames(String configDirectoryPath) {
+		PrintWriter writer = null;
+
+		try {
+			writer = new PrintWriter(configDirectoryPath + File.separator + "customfemalenames.txt", StandardCharsets.UTF_8);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		writer.println("Olivia,");
+		writer.println("Emma,");
+		writer.println("Charlotte");
+		writer.close();
+	}
+
 }
