@@ -12,18 +12,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.google.gson.JsonSyntaxException;
 import com.natamus.collective_common_forge.data.GlobalVariables;
 import com.natamus.collective_common_forge.functions.DataFunctions;
 import com.natamus.collective_common_forge.functions.EntityFunctions;
+import com.natamus.collective_common_forge.functions.JsonFunctions;
 import com.natamus.collective_common_forge.functions.StringFunctions;
 import com.natamus.villagernames_common_forge.config.ConfigHandler;
 import com.natamus.villagernames_common_forge.util.Names;
 
+import daripher.femalevillagers.entity.FemaleVillager;
 import daripher.femalevillagers.init.EntityInit;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -45,6 +51,72 @@ public class VillagerNamesCompatibility {
 	}
 
 	@SubscribeEvent
+	public static void setFemaleVillagerNameInGUI(PlayerInteractEvent.EntityInteract event) {
+		if (event.getTarget().getType() != EntityInit.FEMALE_VILLAGER.get()) {
+			return;
+		}
+
+		if (event.getEntity().level.isClientSide) {
+			return;
+		}
+
+		if (!event.getTarget().hasCustomName()) {
+			return;
+		}
+
+		if (event.getEntity().isCrouching()) {
+			return;
+		}
+
+		if (event.getHand() != InteractionHand.MAIN_HAND) {
+			return;
+		}
+
+		var villager = (FemaleVillager) event.getTarget();
+		var villagerData = villager.getVillagerData();
+		var villagerProfession = villagerData.getProfession().toString();
+
+		if (villagerProfession.equals("none") || villagerProfession.equals("nitwit")) {
+			return;
+		}
+
+		if (villagerProfession.contains(":")) {
+			villagerProfession = villagerProfession.split(":")[1];
+		}
+
+		if (villagerProfession.contains("-")) {
+			villagerProfession = villagerProfession.split("-")[0].trim();
+		}
+
+		var villagerName = villager.getName();
+
+		try {
+			var nameJson = Component.Serializer.toJson(villagerName);
+			var nameComponentMap = JsonFunctions.JsonStringToHashMap(nameJson);
+			var prevName = nameComponentMap.get("text");
+			var formattedProfession = villagerProfession.substring(0, 1).toUpperCase() + villagerProfession.substring(1);
+
+			if (prevName.contains(formattedProfession)) {
+				return;
+			}
+
+			nameComponentMap.put("text", prevName + " the " + formattedProfession);
+			villager.setCustomName(Component.Serializer.fromJson(JsonFunctions.HashMapToJsonString(nameComponentMap)));
+
+			new Thread(() -> {
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException exception) {
+				}
+
+				nameComponentMap.put("text", prevName.replace(" the ", "").replace(formattedProfession, ""));
+				villager.setCustomName(Component.Serializer.fromJson(JsonFunctions.HashMapToJsonString(nameComponentMap)));
+			}).start();
+		} catch (JsonSyntaxException exception) {
+		}
+	}
+
+	@SubscribeEvent
 	public static void initCustomFemaleNames(FMLLoadCompleteEvent event) {
 		var configDirectoryPath = DataFunctions.getConfigDirectory() + File.separator + "villagernames";
 		var configDirectory = new File(configDirectoryPath);
@@ -63,6 +135,7 @@ public class VillagerNamesCompatibility {
 	public static void addCompatibility() {
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(VillagerNamesCompatibility::initCustomFemaleNames);
 		MinecraftForge.EVENT_BUS.addListener(VillagerNamesCompatibility::setVillagerName);
+		MinecraftForge.EVENT_BUS.addListener(VillagerNamesCompatibility::setFemaleVillagerNameInGUI);
 	}
 
 	private static boolean shouldHaveName(Entity entity) {
