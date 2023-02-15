@@ -22,11 +22,12 @@ public class FemaleZombieVillagerModel<T extends FemaleZombieVillager> extends Z
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition model = new MeshDefinition();
 		var root = model.getRoot();
-		root.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(44, 22).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)),
+
+		root.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(45, 22).addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)),
 				PartPose.offsetAndRotation(-4.5F, 4.0F, 0.0F, -0.1745F, 0.0F, 0.0F));
 
 		root.addOrReplaceChild("left_arm",
-				CubeListBuilder.create().texOffs(44, 22).mirror().addBox(-0.75F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false),
+				CubeListBuilder.create().texOffs(45, 22).mirror().addBox(-0.75F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false),
 				PartPose.offsetAndRotation(3.5F, 4.0F, 0.0F, 0.2094F, 0.0F, 0.0F));
 
 		var body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 20).addBox(-4.0F, -0.75F, -3.0F, 8.0F, 12.0F, 6.0F, new CubeDeformation(-0.45F))
@@ -41,7 +42,7 @@ public class FemaleZombieVillagerModel<T extends FemaleZombieVillager> extends Z
 				PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.48F, 0.0F, 0.0F));
 
 		breast.addOrReplaceChild("breast_bottom_overlay_r1",
-				CubeListBuilder.create().texOffs(2, 46).mirror().addBox(-4.0F, -0.5F, -1.5F, 8.0F, -1.0F, 4.0F, new CubeDeformation(-0.19F)).mirror(false),
+				CubeListBuilder.create().texOffs(2, 47).mirror().addBox(-4.0F, -0.5F, -1.5F, 8.0F, -1.0F, 4.0F, new CubeDeformation(-0.19F)).mirror(false),
 				PartPose.offsetAndRotation(0.0F, 5.2916F, -0.9997F, -0.48F, 0.0F, 0.0F));
 
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 22).addBox(-1.8F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(-0.2F)),
@@ -62,6 +63,7 @@ public class FemaleZombieVillagerModel<T extends FemaleZombieVillager> extends Z
 
 		hat.addOrReplaceChild("hat_rim", CubeListBuilder.create().texOffs(30, 47).addBox(-8.0F, -8.0F, -6.0F, 16.0F, 16.0F, 1.0F, new CubeDeformation(0.3F)),
 				PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.5708F, 0.0F, 0.0F));
+
 		return LayerDefinition.create(model, 64, 64);
 	}
 }

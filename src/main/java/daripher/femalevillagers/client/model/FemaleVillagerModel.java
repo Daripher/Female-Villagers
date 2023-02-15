@@ -57,13 +57,13 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 		var breast = body.addOrReplaceChild("breast", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -22.0F, -3.0F, 0.1309F, 0.0F, 0.0F));
 
 		breast.addOrReplaceChild("breast_overlay_r1",
-				CubeListBuilder.create().texOffs(4, 43).addBox(-4.0F, 0.0F, 0.0F, 8.0F, 5.0F, 2.0F, new CubeDeformation(-0.2F)).texOffs(18, 29).mirror()
+				CubeListBuilder.create().texOffs(4, 42).addBox(-4.0F, 0.0F, 0.0F, 8.0F, 5.0F, 2.0F, new CubeDeformation(-0.2F)).texOffs(18, 29).mirror()
 						.addBox(-4.0F, 3.25F, 0.0F, 8.0F, 2.0F, 4.0F, new CubeDeformation(-0.51F)).mirror(false).texOffs(19, 24)
 						.addBox(-4.0F, 0.0F, 0.0F, 8.0F, 5.0F, 3.0F, new CubeDeformation(-0.5F)),
 				PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.48F, 0.0F, 0.0F));
 
 		breast.addOrReplaceChild("breast_bottom_overlay_r1",
-				CubeListBuilder.create().texOffs(2, 46).mirror().addBox(-4.0F, -0.5F, -1.5F, 8.0F, -1.0F, 4.0F, new CubeDeformation(-0.19F)).mirror(false),
+				CubeListBuilder.create().texOffs(2, 47).mirror().addBox(-4.0F, -0.5F, -1.5F, 8.0F, -1.0F, 4.0F, new CubeDeformation(-0.19F)).mirror(false),
 				PartPose.offsetAndRotation(0.0F, 5.2916F, -0.9997F, -0.48F, 0.0F, 0.0F));
 
 		var left_arm = root.addOrReplaceChild("left_arm",
@@ -71,11 +71,11 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 				PartPose.offsetAndRotation(5.0F, 4.0F, 0.0F, -1.1781F, 0.0F, 0.0F));
 
 		left_arm.addOrReplaceChild("cube_r1",
-				CubeListBuilder.create().texOffs(56, 42).mirror().addBox(-2.5F, -2.0F, -4.0F, 4.0F, 3.0F, 0.0F, new CubeDeformation(0.01F)).mirror(false),
+				CubeListBuilder.create().texOffs(52, 38).mirror().addBox(-2.5F, -2.0F, -4.0F, 4.0F, 3.0F, 0.0F, new CubeDeformation(0.01F)).mirror(false),
 				PartPose.offsetAndRotation(-0.5F, 7.5F, -2.0F, 0.0F, 3.1416F, 1.5708F));
 
 		left_arm.addOrReplaceChild("cube_r2",
-				CubeListBuilder.create().texOffs(53, 38).mirror().addBox(-2.5F, -4.0F, -1.0F, 4.0F, 4.0F, 0.0F, new CubeDeformation(0.01F)).mirror(false),
+				CubeListBuilder.create().texOffs(52, 38).mirror().addBox(-2.5F, -4.0F, -1.0F, 4.0F, 4.0F, 0.0F, new CubeDeformation(0.01F)).mirror(false),
 				PartPose.offsetAndRotation(-0.5F, 7.5F, -2.0F, -1.5708F, 0.0F, -1.5708F));
 
 		left_arm.addOrReplaceChild("cube_r3",
@@ -83,10 +83,10 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 				PartPose.offsetAndRotation(-0.5F, 7.5F, -2.0F, -1.5708F, 3.1416F, 1.5708F));
 
 		left_arm.addOrReplaceChild("cube_r4",
-				CubeListBuilder.create().texOffs(41, 42).mirror().addBox(-1.5F, -1.0F, 0.0F, 4.0F, 3.0F, 0.0F, new CubeDeformation(0.01F)).mirror(false),
+				CubeListBuilder.create().texOffs(40, 43).mirror().addBox(-1.5F, -1.0F, 0.0F, 4.0F, 3.0F, 0.0F, new CubeDeformation(0.01F)).mirror(false),
 				PartPose.offsetAndRotation(-0.5F, 7.5F, -2.0F, 0.0F, 3.1416F, -1.5708F));
 
-		left_arm.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(45, 38).addBox(-2.5F, -1.0F, 0.0F, 0.0F, 3.0F, 4.0F, new CubeDeformation(0.01F)),
+		left_arm.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(36, 38).addBox(-2.5F, -1.0F, 0.0F, 0.0F, 3.0F, 4.0F, new CubeDeformation(0.01F)),
 				PartPose.offsetAndRotation(-0.5F, 7.5F, -2.0F, 3.1416F, 3.1416F, 1.5708F));
 
 		var right_arm = root.addOrReplaceChild("right_arm",
@@ -94,14 +94,14 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 				PartPose.offsetAndRotation(-5.0F, 4.0F, 0.0F, -1.0908F, 0.0F, 0.0F));
 
 		right_arm.addOrReplaceChild("cube_r6",
-				CubeListBuilder.create().texOffs(41, 38).mirror().addBox(-2.5F, -2.0F, -4.0F, 0.0F, 3.0F, 4.0F, new CubeDeformation(0.01F)).mirror(false).texOffs(41, 42)
+				CubeListBuilder.create().texOffs(36, 38).mirror().addBox(-2.5F, -2.0F, -4.0F, 0.0F, 3.0F, 4.0F, new CubeDeformation(0.01F)).mirror(false).texOffs(40, 43)
 						.addBox(-2.5F, -2.0F, 0.0F, 4.0F, 3.0F, 0.0F, new CubeDeformation(0.01F)),
 				PartPose.offsetAndRotation(-0.5F, 7.5F, -2.0F, 0.0F, 3.1416F, 1.5708F));
 
-		right_arm.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(56, 42).addBox(-1.5F, -1.0F, -4.0F, 4.0F, 3.0F, 0.0F, new CubeDeformation(0.01F)),
+		right_arm.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(52, 38).addBox(-1.5F, -1.0F, -4.0F, 4.0F, 3.0F, 0.0F, new CubeDeformation(0.01F)),
 				PartPose.offsetAndRotation(-0.5F, 7.5F, -2.0F, 0.0F, 3.1416F, -1.5708F));
 
-		right_arm.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(53, 38).addBox(-1.5F, -4.0F, -2.0F, 4.0F, 4.0F, 0.0F, new CubeDeformation(0.01F)),
+		right_arm.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(52, 38).addBox(-1.5F, -4.0F, -2.0F, 4.0F, 4.0F, 0.0F, new CubeDeformation(0.01F)),
 				PartPose.offsetAndRotation(-0.5F, 7.5F, -2.0F, 1.5708F, 3.1416F, -1.5708F));
 
 		right_arm.addOrReplaceChild("cube_r9",
