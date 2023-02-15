@@ -33,7 +33,7 @@ mixin {
 }
 
 minecraft {
-    mappings channel: 'official', version: '1.19'
+    mappings channel: 'official', version: '1.19.2'
 
     runs {
         client {
@@ -84,8 +84,7 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-            args "-mixin.config=femalevillagers.mixins.json"
+            args '--mod', 'femalevillagers', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 femalevillagers {
@@ -108,18 +107,19 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19-41.1.0'
+	minecraft 'net.minecraftforge:forge:1.19.2-43.2.0'
 	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    implementation fg.deobf("curse.maven:villager-names-345854:4325281")
-    implementation fg.deobf("curse.maven:collective-342584:4361320")
+	implementation fg.deobf("curse.maven:villager-names-345854:4325281")
+	implementation fg.deobf("curse.maven:collective-342584:4361320")
 }
 
+// Example for how to get properties into the manifest for reading at runtime.
 jar {
     manifest {
         attributes([
                 "Specification-Title"     : "femalevillagers",
                 "Specification-Vendor"    : "Daripher",
-                "Specification-Version"   : "1",
+                "Specification-Version"   : project.jar.archiveVersion,
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : "Daripher",
