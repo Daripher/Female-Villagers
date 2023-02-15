@@ -3,6 +3,7 @@ package daripher.femalevillagers.event;
 import javax.annotation.Nullable;
 
 import daripher.femalevillagers.FemaleVillagersMod;
+import daripher.femalevillagers.compat.GuardVillagersCompatibility;
 import daripher.femalevillagers.entity.FemaleEvoker;
 import daripher.femalevillagers.entity.FemalePillager;
 import daripher.femalevillagers.entity.FemaleVillager;
@@ -90,6 +91,10 @@ public class FemaleVillagerEvents {
 			var replacedEntity = (Vindicator) entity;
 			replacementEntity = new FemaleVindicator(entity.level);
 			replacementEntity.setItemSlot(EquipmentSlot.MAINHAND, replacedEntity.getItemBySlot(EquipmentSlot.MAINHAND));
+		}
+
+		if (EntityType.getKey(entity.getType()).toString().equals("guardvillagers:guard")) {
+			replacementEntity = GuardVillagersCompatibility.createFemaleGuard(entity);
 		}
 
 		if (replacementEntity != null) {

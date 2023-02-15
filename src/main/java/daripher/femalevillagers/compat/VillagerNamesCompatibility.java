@@ -21,11 +21,13 @@ import com.natamus.collective_common_forge.functions.StringFunctions;
 import com.natamus.villagernames_common_forge.config.ConfigHandler;
 import com.natamus.villagernames_common_forge.util.Names;
 
+import daripher.femalevillagers.FemaleVillagersMod;
 import daripher.femalevillagers.entity.FemaleVillager;
 import daripher.femalevillagers.init.EntityInit;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -35,6 +37,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class VillagerNamesCompatibility {
 	private static List<String> customFemaleNames = null;
@@ -151,6 +154,10 @@ public class VillagerNamesCompatibility {
 			return false;
 		}
 
+		if (EntityType.getKey(entity.getType()).toString().equals("femalevillagers:female_guard")) {
+			return true;
+		}
+
 		if (entity.getType() == EntityInit.FEMALE_WANDERING_TRADER.get()) {
 			return true;
 		}
@@ -173,7 +180,7 @@ public class VillagerNamesCompatibility {
 	}
 
 	private static boolean isFemaleEntity(Entity entity) {
-		return entity.getType() == EntityInit.FEMALE_VILLAGER.get() || entity.getType() == EntityInit.FEMALE_WANDERING_TRADER.get();
+		return ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()).getNamespace().equals(FemaleVillagersMod.MOD_ID);
 	}
 
 	private static String getRandomName(boolean isFemale) {

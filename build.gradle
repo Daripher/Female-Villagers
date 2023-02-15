@@ -111,9 +111,9 @@ dependencies {
 	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 	implementation fg.deobf("curse.maven:villager-names-345854:4325281")
 	implementation fg.deobf("curse.maven:collective-342584:4361320")
+	implementation fg.deobf("curse.maven:guard-villagers-360203:3970122")
 }
 
-// Example for how to get properties into the manifest for reading at runtime.
 jar {
     manifest {
         attributes([
