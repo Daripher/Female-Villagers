@@ -22,11 +22,13 @@ import com.natamus.villagernames_common_forge.util.Names;
 import daripher.femalevillagers.init.EntityInit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.Villager;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class VillagerNamesCompatibility {
 	private static List<String> customFemaleNames = null;
@@ -56,6 +58,11 @@ public class VillagerNamesCompatibility {
 			writeCustomNames(configDirectoryPath);
 			customFemaleNames = new ArrayList<>(Arrays.asList("Olivia", "Emma", "Charlotte"));
 		}
+	}
+	
+	public static void addCompatibility() {
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(VillagerNamesCompatibility::initCustomFemaleNames);
+		MinecraftForge.EVENT_BUS.addListener(VillagerNamesCompatibility::setVillagerName);
 	}
 
 	private static boolean shouldHaveName(Entity entity) {
