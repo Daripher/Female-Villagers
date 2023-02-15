@@ -18,8 +18,7 @@ public class FemaleZombieVillagerRenderer extends HumanoidMobRenderer<FemaleZomb
 
 	public FemaleZombieVillagerRenderer(EntityRendererProvider.Context context) {
 		super(context, new ZombieVillagerModel<>(context.bakeLayer(FemaleZombieVillagerModel.LAYER_LOCATION)), 0.5F);
-		addLayer(new HumanoidArmorLayer<>(this,
-				new ZombieVillagerModel<>(context.bakeLayer(ModelLayers.ZOMBIE_VILLAGER_INNER_ARMOR)),
+		addLayer(new HumanoidArmorLayer<>(this, new ZombieVillagerModel<>(context.bakeLayer(ModelLayers.ZOMBIE_VILLAGER_INNER_ARMOR)),
 				new ZombieVillagerModel<>(context.bakeLayer(ModelLayers.ZOMBIE_VILLAGER_OUTER_ARMOR))));
 		addLayer(new VillagerProfessionLayer<>(this, context.getResourceManager(), "zombie_villager"));
 	}
@@ -36,14 +35,7 @@ public class FemaleZombieVillagerRenderer extends HumanoidMobRenderer<FemaleZomb
 
 	@Override
 	protected void scale(FemaleZombieVillager villager, PoseStack poseStack, float partialTicks) {
-		var defaultScale = 0.9375F;
-		shadowRadius = 0.5F;
-
-		if (villager.isBaby()) {
-			defaultScale *= 0.5F;
-			shadowRadius *= 0.5F;
-		}
-
+		var defaultScale = 0.89F;
 		poseStack.scale(defaultScale, defaultScale, defaultScale);
 	}
 }
