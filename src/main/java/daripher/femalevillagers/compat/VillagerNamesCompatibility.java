@@ -59,6 +59,10 @@ public class VillagerNamesCompatibility {
 			return false;
 		}
 
+		if (entity.getType() == EntityInit.FEMALE_WANDERING_TRADER.get()) {
+			return true;
+		}
+
 		if (!(entity instanceof Villager)) {
 			boolean shouldHaveName = false;
 
