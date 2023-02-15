@@ -1,5 +1,6 @@
 package daripher.femalevillagers;
 
+import daripher.femalevillagers.compat.GuardVillagersCompatibility;
 import daripher.femalevillagers.compat.VillagerNamesCompatibility;
 import daripher.femalevillagers.init.EntityInit;
 import net.minecraftforge.fml.ModList;
@@ -15,6 +16,10 @@ public class FemaleVillagersMod {
 
 		if (ModList.get().isLoaded("villagernames")) {
 			VillagerNamesCompatibility.addCompatibility();
+		}
+
+		if (ModList.get().isLoaded("guardvillagers")) {
+			GuardVillagersCompatibility.addCompatibility();
 		}
 	}
 }
