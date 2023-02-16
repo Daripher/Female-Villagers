@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import daripher.femalevillagers.FemaleVillagersMod;
 import daripher.femalevillagers.compat.GuardVillagersCompatibility;
 import daripher.femalevillagers.entity.FemaleEvoker;
+import daripher.femalevillagers.entity.FemaleIllusioner;
 import daripher.femalevillagers.entity.FemalePillager;
 import daripher.femalevillagers.entity.FemaleVillager;
 import daripher.femalevillagers.entity.FemaleVindicator;
@@ -91,6 +92,10 @@ public class FemaleVillagerEvents {
 			var replacedEntity = (Vindicator) entity;
 			replacementEntity = new FemaleVindicator(entity.level);
 			replacementEntity.setItemSlot(EquipmentSlot.MAINHAND, replacedEntity.getItemBySlot(EquipmentSlot.MAINHAND));
+		}
+
+		if (entity.getType() == EntityType.ILLUSIONER) {
+			replacementEntity = new FemaleIllusioner(entity.level);
 		}
 
 		if (EntityType.getKey(entity.getType()).toString().equals("guardvillagers:guard")) {

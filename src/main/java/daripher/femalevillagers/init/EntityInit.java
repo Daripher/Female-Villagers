@@ -2,6 +2,7 @@ package daripher.femalevillagers.init;
 
 import daripher.femalevillagers.FemaleVillagersMod;
 import daripher.femalevillagers.entity.FemaleEvoker;
+import daripher.femalevillagers.entity.FemaleIllusioner;
 import daripher.femalevillagers.entity.FemalePillager;
 import daripher.femalevillagers.entity.FemaleVillager;
 import daripher.femalevillagers.entity.FemaleVindicator;
@@ -21,4 +22,5 @@ public class EntityInit {
 	public static final RegistryObject<EntityType<FemalePillager>> FEMALE_PILLAGER = REGISTRY.register("female_pillager", FemalePillager::createEntityType);
 	public static final RegistryObject<EntityType<FemaleVindicator>> FEMALE_VINDICATOR = REGISTRY.register("female_vindicator", FemaleVindicator::createEntityType);
 	public static final RegistryObject<EntityType<FemaleEvoker>> FEMALE_EVOKER = REGISTRY.register("female_evoker", FemaleEvoker::createEntityType);
+	public static final RegistryObject<EntityType<FemaleIllusioner>> FEMALE_ILLUSIONER = REGISTRY.register("female_illusioner", FemaleIllusioner::createEntityType);
 }

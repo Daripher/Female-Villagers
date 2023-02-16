@@ -2,6 +2,7 @@ package daripher.femalevillagers.client.init;
 
 import daripher.femalevillagers.FemaleVillagersMod;
 import daripher.femalevillagers.client.render.FemaleEvokerRenderer;
+import daripher.femalevillagers.client.render.FemaleIllusionerRenderer;
 import daripher.femalevillagers.client.render.FemalePillagerRenderer;
 import daripher.femalevillagers.client.render.FemaleVillagerRenderer;
 import daripher.femalevillagers.client.render.FemaleVindicatorRenderer;
@@ -25,5 +26,6 @@ public class RendererInit {
 		EntityRenderers.register(EntityInit.FEMALE_PILLAGER.get(), FemalePillagerRenderer::new);
 		EntityRenderers.register(EntityInit.FEMALE_VINDICATOR.get(), FemaleVindicatorRenderer::new);
 		EntityRenderers.register(EntityInit.FEMALE_EVOKER.get(), FemaleEvokerRenderer::new);
+		EntityRenderers.register(EntityInit.FEMALE_ILLUSIONER.get(), FemaleIllusionerRenderer::new);
 	}
 }
