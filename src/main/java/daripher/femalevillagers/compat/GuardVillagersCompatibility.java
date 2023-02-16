@@ -44,7 +44,7 @@ public class GuardVillagersCompatibility {
 	public static void addCompatibility() {
 		var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(GuardVillagersCompatibility::createAttributes);
-		modEventBus.addListener(GuardVillagersCompatibility::registerEntityType);
+		modEventBus.addGenericListener(EntityType.class, GuardVillagersCompatibility::registerEntityType);
 		modEventBus.addListener(GuardVillagersCompatibility::registerRenderer);
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, GuardVillagersCompatibility::attemptConvertingVillager);
 	}
