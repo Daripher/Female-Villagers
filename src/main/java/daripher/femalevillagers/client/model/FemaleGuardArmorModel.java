@@ -38,10 +38,10 @@ public class FemaleGuardArmorModel extends HumanoidModel<FemaleGuard> {
 		var breast = body.addOrReplaceChild("breast", CubeListBuilder.create(), PartPose.offsetAndRotation(0, -22, -2.25F, 0.1309F, 0, 0));
 
 		breast.addOrReplaceChild("breast_bottom_r1",
-				CubeListBuilder.create().texOffs(17, 27).mirror().addBox(-4, 4.25F, -2.75F, 8, 1, 3, new CubeDeformation(size - 0.51F)).mirror(false),
+				CubeListBuilder.create().texOffs(17, 27).mirror().addBox(-4, 4.25F, -2.75F, 8, 1, 3, new CubeDeformation(size - 0.71F)).mirror(false),
 				PartPose.offsetAndRotation(0, 0, 0, 0.48F, 3.1416F, 0));
 
-		breast.addOrReplaceChild("breast_r1", CubeListBuilder.create().texOffs(17, 19).addBox(-4, 0.25F, -0.25F, 8, 5, 3, new CubeDeformation(size - 0.5F)),
+		breast.addOrReplaceChild("breast_r1", CubeListBuilder.create().texOffs(17, 19).addBox(-4, 0.25F, -0.25F, 8, 5, 3, new CubeDeformation(size - 0.7F)),
 				PartPose.offsetAndRotation(0, 0, 0, -0.48F, 0, 0));
 
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 16).addBox(-1.8F, 0, -2, 4, 12, 4, new CubeDeformation(size - 0.2F)),
