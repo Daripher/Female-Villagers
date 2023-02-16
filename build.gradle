@@ -21,7 +21,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.2'
+version = '1.3'
 group = 'daripher.femalevillagers'
 archivesBaseName = 'FemaleVillagers-1.18.2'
 
