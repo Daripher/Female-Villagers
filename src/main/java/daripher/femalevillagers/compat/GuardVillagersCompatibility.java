@@ -23,8 +23,6 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.SwordItem;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -97,7 +95,6 @@ public class GuardVillagersCompatibility {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private static void registerRenderer(FMLClientSetupEvent event) {
 		ForgeHooksClient.registerLayerDefinition(FemaleGuardModel.LAYER_LOCATION, FemaleGuardModel::createBodyLayer);
 		ForgeHooksClient.registerLayerDefinition(FemaleGuardArmorModel.INNER_LAYER_LOCATION, FemaleGuardArmorModel::createInnerArmorLayer);
