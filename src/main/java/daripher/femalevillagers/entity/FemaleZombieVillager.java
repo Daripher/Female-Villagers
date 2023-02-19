@@ -3,6 +3,7 @@ package daripher.femalevillagers.entity;
 import daripher.femalevillagers.FemaleVillagersMod;
 import daripher.femalevillagers.init.EntityInit;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.monster.ZombieVillager;
@@ -37,6 +38,11 @@ public class FemaleZombieVillager extends ZombieVillager {
 	@Override
 	public float getVoicePitch() {
 		return super.getVoicePitch() + 0.4F;
+	}
+
+	@Override
+	protected ResourceLocation getDefaultLootTable() {
+		return EntityType.ZOMBIE_VILLAGER.getDefaultLootTable();
 	}
 
 	@SubscribeEvent

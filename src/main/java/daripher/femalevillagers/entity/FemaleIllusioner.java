@@ -47,6 +47,11 @@ public class FemaleIllusioner extends Illusioner {
 		return super.getVoicePitch() + 0.6F;
 	}
 
+	@Override
+	protected ResourceLocation getDefaultLootTable() {
+		return EntityType.ILLUSIONER.getDefaultLootTable();
+	}
+
 	@SubscribeEvent
 	public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
 		event.put(EntityInit.FEMALE_ILLUSIONER.get(), Evoker.createAttributes().build());
