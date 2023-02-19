@@ -3,6 +3,7 @@ package daripher.femalevillagers.entity;
 import daripher.femalevillagers.FemaleVillagersMod;
 import daripher.femalevillagers.init.EntityInit;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.monster.Pillager;
@@ -37,6 +38,11 @@ public class FemalePillager extends Pillager {
 	@Override
 	public float getVoicePitch() {
 		return super.getVoicePitch() + 0.6F;
+	}
+
+	@Override
+	protected ResourceLocation getDefaultLootTable() {
+		return EntityType.PILLAGER.getDefaultLootTable();
 	}
 
 	@SubscribeEvent
