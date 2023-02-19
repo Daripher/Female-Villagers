@@ -18,6 +18,7 @@ import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.world.entity.monster.Vindicator;
 import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.raid.Raider;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -51,6 +52,10 @@ public class FemaleVillagerEvents {
 
 	@Nullable
 	private static Entity createReplacementEntity(Entity entity) {
+		if (entity instanceof Raider raider && raider.getCurrentRaid() != null) {
+			return null;
+		}
+
 		Entity replacementEntity = null;
 
 		if (entity.getType() == EntityType.VILLAGER) {

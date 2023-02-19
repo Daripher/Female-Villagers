@@ -6,6 +6,7 @@ import daripher.femalevillagers.client.model.FemaleGuardModel;
 import daripher.femalevillagers.client.render.FemaleGuardRenderer;
 import daripher.femalevillagers.entity.FemaleGuard;
 import daripher.femalevillagers.entity.FemaleVillager;
+import daripher.femalevillagers.init.EntityInit;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.raid.Raid.RaiderType;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -45,6 +47,12 @@ public class GuardVillagersCompatibility {
 		modEventBus.addGenericListener(EntityType.class, GuardVillagersCompatibility::registerEntityType);
 		modEventBus.addListener(GuardVillagersCompatibility::registerRenderer);
 		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, GuardVillagersCompatibility::attemptConvertingVillager);
+	}
+
+	public static void registerFemaleIllusionerRaiderType() {
+		if (GuardConfig.IllusionerRaids) {
+			RaiderType.create("FEMALE_ILLUSIONER", EntityInit.FEMALE_ILLUSIONER.get(), new int[] { 0, 0, 0, 0, 0, 1, 1, 2 });
+		}
 	}
 
 	private static void createAttributes(EntityAttributeCreationEvent event) {
