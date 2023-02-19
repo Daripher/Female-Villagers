@@ -1,10 +1,10 @@
-package daripher.femalevillagers.compat;
+package daripher.femalevillagers.compat.guardvillagers;
 
 import daripher.femalevillagers.FemaleVillagersMod;
-import daripher.femalevillagers.client.model.FemaleGuardArmorModel;
-import daripher.femalevillagers.client.model.FemaleGuardModel;
-import daripher.femalevillagers.client.render.FemaleGuardRenderer;
-import daripher.femalevillagers.entity.FemaleGuard;
+import daripher.femalevillagers.compat.guardvillagers.client.model.FemaleGuardArmorModel;
+import daripher.femalevillagers.compat.guardvillagers.client.model.FemaleGuardModel;
+import daripher.femalevillagers.compat.guardvillagers.client.render.FemaleGuardRenderer;
+import daripher.femalevillagers.compat.guardvillagers.entity.FemaleGuard;
 import daripher.femalevillagers.entity.FemaleVillager;
 import daripher.femalevillagers.init.EntityInit;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -41,31 +41,48 @@ import tallestegg.guardvillagers.entities.Guard;
 public class GuardVillagersCompatibility {
 	private static final ResourceLocation FEMALE_GUARD_ENTITY_ID = new ResourceLocation(FemaleVillagersMod.MOD_ID, "female_guard");
 
-	public static void addCompatibility() {
+	public void addCompatibility() {
 		var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-		modEventBus.addListener(GuardVillagersCompatibility::createAttributes);
-		modEventBus.addGenericListener(EntityType.class, GuardVillagersCompatibility::registerEntityType);
-		modEventBus.addListener(GuardVillagersCompatibility::registerRenderer);
-		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, GuardVillagersCompatibility::attemptConvertingVillager);
+		modEventBus.addListener(this::createAttributes);
+		modEventBus.addGenericListener(EntityType.class, this::registerEntityType);
+		modEventBus.addListener(this::registerRenderer);
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, this::attemptConvertingVillager);
 	}
 
-	public static void registerFemaleIllusionerRaiderType() {
+	public Entity createFemaleGuard(Entity guard) {
+		var replacedEntity = (Guard) guard;
+		var replacementEntity = new FemaleGuard(guard.level);
+		replacementEntity.setGuardVariant(replacedEntity.getGuardVariant());
+
+		for (var slot : EquipmentSlot.values()) {
+			replacementEntity.setItemSlot(slot, replacedEntity.getItemBySlot(slot));
+		}
+
+		return replacementEntity;
+	}
+
+	public void registerFemaleIllusionerRaiderType() {
 		if (GuardConfig.IllusionerRaids) {
 			RaiderType.create("FEMALE_ILLUSIONER", EntityInit.FEMALE_ILLUSIONER.get(), new int[] { 0, 0, 0, 0, 0, 1, 1, 2 });
 		}
 	}
 
-	private static void createAttributes(EntityAttributeCreationEvent event) {
+	@SuppressWarnings("unchecked")
+	public EntityType<FemaleGuard> getFemaleGuardEntityType() {
+		return (EntityType<FemaleGuard>) ForgeRegistries.ENTITIES.getValue(FEMALE_GUARD_ENTITY_ID);
+	}
+
+	private void createAttributes(EntityAttributeCreationEvent event) {
 		event.put(getFemaleGuardEntityType(), Guard.createAttributes().build());
 	}
 
-	private static void registerEntityType(RegistryEvent.Register<EntityType<?>> event) {
+	private void registerEntityType(RegistryEvent.Register<EntityType<?>> event) {
 		var entityType = FemaleGuard.createEntityType();
 		entityType.setRegistryName(FEMALE_GUARD_ENTITY_ID);
 		event.getRegistry().register(entityType);
 	}
 
-	private static void attemptConvertingVillager(PlayerInteractEvent.EntityInteract event) {
+	private void attemptConvertingVillager(PlayerInteractEvent.EntityInteract event) {
 		var player = event.getPlayer();
 		var itemInHand = player.getMainHandItem();
 		var target = event.getTarget();
@@ -94,7 +111,7 @@ public class GuardVillagersCompatibility {
 				return;
 			}
 
-			GuardVillagersCompatibility.convertVillager(villager, player);
+			convertVillager(villager, player);
 			event.setCanceled(true);
 
 			if (!player.isCreative()) {
@@ -103,31 +120,14 @@ public class GuardVillagersCompatibility {
 		}
 	}
 
-	private static void registerRenderer(FMLClientSetupEvent event) {
+	private void registerRenderer(FMLClientSetupEvent event) {
 		ForgeHooksClient.registerLayerDefinition(FemaleGuardModel.LAYER_LOCATION, FemaleGuardModel::createBodyLayer);
 		ForgeHooksClient.registerLayerDefinition(FemaleGuardArmorModel.INNER_LAYER_LOCATION, FemaleGuardArmorModel::createInnerArmorLayer);
 		ForgeHooksClient.registerLayerDefinition(FemaleGuardArmorModel.OUTER_LAYER_LOCATION, FemaleGuardArmorModel::createOuterArmorLayer);
 		EntityRenderers.register(getFemaleGuardEntityType(), FemaleGuardRenderer::new);
 	}
 
-	@SuppressWarnings("unchecked")
-	public static EntityType<FemaleGuard> getFemaleGuardEntityType() {
-		return (EntityType<FemaleGuard>) ForgeRegistries.ENTITIES.getValue(FEMALE_GUARD_ENTITY_ID);
-	}
-
-	public static Entity createFemaleGuard(Entity guard) {
-		var replacedEntity = (Guard) guard;
-		var replacementEntity = new FemaleGuard(guard.level);
-		((FemaleGuard) replacementEntity).setGuardVariant(replacedEntity.getGuardVariant());
-
-		for (var slot : EquipmentSlot.values()) {
-			replacementEntity.setItemSlot(slot, replacedEntity.getItemBySlot(slot));
-		}
-
-		return replacementEntity;
-	}
-
-	private static void convertVillager(LivingEntity entity, Player player) {
+	private void convertVillager(LivingEntity entity, Player player) {
 		player.swing(InteractionHand.MAIN_HAND);
 		var itemInHand = player.getItemBySlot(EquipmentSlot.MAINHAND);
 		var guard = GuardEntityType.GUARD.get().create(entity.level);

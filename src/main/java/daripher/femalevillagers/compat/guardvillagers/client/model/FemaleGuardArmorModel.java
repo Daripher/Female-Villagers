@@ -1,7 +1,7 @@
-package daripher.femalevillagers.client.model;
+package daripher.femalevillagers.compat.guardvillagers.client.model;
 
 import daripher.femalevillagers.FemaleVillagersMod;
-import daripher.femalevillagers.entity.FemaleGuard;
+import daripher.femalevillagers.compat.guardvillagers.entity.FemaleGuard;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

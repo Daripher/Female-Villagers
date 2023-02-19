@@ -1,13 +1,13 @@
-package daripher.femalevillagers.client.render;
+package daripher.femalevillagers.compat.guardvillagers.client.render;
 
 import javax.annotation.Nullable;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import daripher.femalevillagers.FemaleVillagersMod;
-import daripher.femalevillagers.client.model.FemaleGuardArmorModel;
-import daripher.femalevillagers.client.model.FemaleGuardModel;
-import daripher.femalevillagers.entity.FemaleGuard;
+import daripher.femalevillagers.compat.guardvillagers.client.model.FemaleGuardArmorModel;
+import daripher.femalevillagers.compat.guardvillagers.client.model.FemaleGuardModel;
+import daripher.femalevillagers.compat.guardvillagers.entity.FemaleGuard;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

@@ -1,7 +1,7 @@
 package daripher.femalevillagers.init;
 
 import daripher.femalevillagers.FemaleVillagersMod;
-import daripher.femalevillagers.compat.GuardVillagersCompatibility;
+import daripher.femalevillagers.compat.Compatibilities;
 import net.minecraft.world.entity.raid.Raid.RaiderType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -18,7 +18,7 @@ public class RaiderTypeInit {
 		RaiderType.create("FEMALE_PILLAGER", EntityInit.FEMALE_PILLAGER.get(), new int[] { 0, 4, 3, 3, 4, 4, 4, 2 });
 
 		if (ModList.get().isLoaded("guardvillagers")) {
-			GuardVillagersCompatibility.registerFemaleIllusionerRaiderType();
+			Compatibilities.GUARD_VILLAGERS.registerFemaleIllusionerRaiderType();
 		}
 	}
 }
