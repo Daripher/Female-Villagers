@@ -1,6 +1,6 @@
-package daripher.femalevillagers.entity;
+package daripher.femalevillagers.compat.guardvillagers.entity;
 
-import daripher.femalevillagers.compat.GuardVillagersCompatibility;
+import daripher.femalevillagers.compat.Compatibilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -16,7 +16,7 @@ public class FemaleGuard extends Guard {
 	}
 
 	public FemaleGuard(Level level) {
-		super(GuardVillagersCompatibility.getFemaleGuardEntityType(), level);
+		super(Compatibilities.GUARD_VILLAGERS.getFemaleGuardEntityType(), level);
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package daripher.femalevillagers.compat;
+package daripher.femalevillagers.compat.villagernames;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +33,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -42,8 +41,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class VillagerNamesCompatibility {
 	private static List<String> customFemaleNames = null;
 
-	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public static void setVillagerName(EntityJoinLevelEvent event) {
+	public void addCompatibility() {
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::initCustomFemaleNames);
+		MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, this::setVillagerName);
+		MinecraftForge.EVENT_BUS.addListener(this::setFemaleVillagerNameInGUI);
+	}
+
+	private void setVillagerName(EntityJoinLevelEvent event) {
 		if (!shouldHaveName(event.getEntity())) {
 			return;
 		}
@@ -53,8 +57,7 @@ public class VillagerNamesCompatibility {
 		EntityFunctions.nameEntity(event.getEntity(), entityName);
 	}
 
-	@SubscribeEvent
-	public static void setFemaleVillagerNameInGUI(PlayerInteractEvent.EntityInteract event) {
+	private void setFemaleVillagerNameInGUI(PlayerInteractEvent.EntityInteract event) {
 		if (event.getTarget().getType() != EntityInit.FEMALE_VILLAGER.get()) {
 			return;
 		}
@@ -119,8 +122,7 @@ public class VillagerNamesCompatibility {
 		}
 	}
 
-	@SubscribeEvent
-	public static void initCustomFemaleNames(FMLLoadCompleteEvent event) {
+	private void initCustomFemaleNames(FMLLoadCompleteEvent event) {
 		var configDirectoryPath = DataFunctions.getConfigDirectory() + File.separator + "villagernames";
 		var configDirectory = new File(configDirectoryPath);
 		var configFile = new File(configDirectoryPath + File.separator + "customfemalenames.txt");
@@ -135,13 +137,7 @@ public class VillagerNamesCompatibility {
 		}
 	}
 
-	public static void addCompatibility() {
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(VillagerNamesCompatibility::initCustomFemaleNames);
-		MinecraftForge.EVENT_BUS.addListener(VillagerNamesCompatibility::setVillagerName);
-		MinecraftForge.EVENT_BUS.addListener(VillagerNamesCompatibility::setFemaleVillagerNameInGUI);
-	}
-
-	private static boolean shouldHaveName(Entity entity) {
+	private boolean shouldHaveName(Entity entity) {
 		if (!ModList.get().isLoaded("villagernames")) {
 			return false;
 		}
@@ -179,11 +175,11 @@ public class VillagerNamesCompatibility {
 		return true;
 	}
 
-	private static boolean isFemaleEntity(Entity entity) {
+	private boolean isFemaleEntity(Entity entity) {
 		return ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()).getNamespace().equals(FemaleVillagersMod.MOD_ID);
 	}
 
-	private static String getRandomName(boolean isFemale) {
+	private String getRandomName(boolean isFemale) {
 		var usePredefinedNames = isFemale ? ConfigHandler._useFemaleNames : ConfigHandler._useMaleNames;
 		var useCustomNames = ConfigHandler._useCustomNames;
 		var predefinedNames = isFemale ? GlobalVariables.femalenames : GlobalVariables.malenames;
@@ -191,7 +187,7 @@ public class VillagerNamesCompatibility {
 		return getRandomName(usePredefinedNames, useCustomNames, predefinedNames, customNames);
 	}
 
-	private static String getRandomName(boolean usePredefinedNames, boolean useCustomNames, List<String> predefinedNames, List<String> customNames) {
+	private String getRandomName(boolean usePredefinedNames, boolean useCustomNames, List<String> predefinedNames, List<String> customNames) {
 		List<String> names = null;
 
 		if (usePredefinedNames) {
@@ -214,7 +210,7 @@ public class VillagerNamesCompatibility {
 		return StringFunctions.capitalizeEveryWord(name);
 	}
 
-	private static String[] readCustomNames(String configDirectoryPath) {
+	private String[] readCustomNames(String configDirectoryPath) {
 		String customNamesString = null;
 
 		try {
@@ -227,7 +223,7 @@ public class VillagerNamesCompatibility {
 		return customNamesString.split(",");
 	}
 
-	private static void writeCustomNames(String configDirectoryPath) {
+	private void writeCustomNames(String configDirectoryPath) {
 		PrintWriter writer = null;
 
 		try {
