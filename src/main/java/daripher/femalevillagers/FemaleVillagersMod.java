@@ -20,5 +20,9 @@ public class FemaleVillagersMod {
 		if (ModList.get().isLoaded("guardvillagers")) {
 			Compatibilities.GUARD_VILLAGERS.addCompatibility();
 		}
+		
+		if (ModList.get().isLoaded("conjurer_illager")) {
+			Compatibilities.THE_CONJURER.addCompatibility();
+		}
 	}
 }

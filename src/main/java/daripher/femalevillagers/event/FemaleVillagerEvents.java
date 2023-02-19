@@ -106,6 +106,10 @@ public class FemaleVillagerEvents {
 		if (EntityType.getKey(entity.getType()).toString().equals("guardvillagers:guard")) {
 			replacementEntity = Compatibilities.GUARD_VILLAGERS.createFemaleGuard(entity);
 		}
+		
+		if (EntityType.getKey(entity.getType()).toString().equals("conjurer_illager:conjurer")) {
+			replacementEntity = Compatibilities.THE_CONJURER.createFemaleConjurer(entity);
+		}
 
 		if (replacementEntity != null) {
 			replacementEntity.setPos(entity.position());
