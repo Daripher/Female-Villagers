@@ -4,7 +4,7 @@ import com.legacy.conjurer_illager.IllagerRegistry;
 import com.legacy.conjurer_illager.entity.ConjurerEntity;
 import com.legacy.conjurer_illager.registry.IllagerEntityTypes;
 
-import daripher.femalevillagers.compat.Compatibilities;
+import daripher.femalevillagers.compat.theconjurer.TheConjurerCompatibility;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -18,7 +18,7 @@ public class FemaleConjurer extends ConjurerEntity {
 	}
 
 	public FemaleConjurer(Level level) {
-		super(Compatibilities.THE_CONJURER.getFemaleConjurerEntityType(), level);
+		super(TheConjurerCompatibility.INSTANCE.getFemaleConjurerEntityType(), level);
 	}
 
 	@Override

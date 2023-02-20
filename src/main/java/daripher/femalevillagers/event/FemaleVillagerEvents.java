@@ -3,7 +3,8 @@ package daripher.femalevillagers.event;
 import javax.annotation.Nullable;
 
 import daripher.femalevillagers.FemaleVillagersMod;
-import daripher.femalevillagers.compat.Compatibilities;
+import daripher.femalevillagers.compat.guardvillagers.GuardVillagersCompatibility;
+import daripher.femalevillagers.compat.theconjurer.TheConjurerCompatibility;
 import daripher.femalevillagers.entity.FemaleEvoker;
 import daripher.femalevillagers.entity.FemaleIllusioner;
 import daripher.femalevillagers.entity.FemalePillager;
@@ -104,11 +105,11 @@ public class FemaleVillagerEvents {
 		}
 
 		if (EntityType.getKey(entity.getType()).toString().equals("guardvillagers:guard")) {
-			replacementEntity = Compatibilities.GUARD_VILLAGERS.createFemaleGuard(entity);
+			replacementEntity = GuardVillagersCompatibility.INSTANCE.createFemaleGuard(entity);
 		}
-		
+
 		if (EntityType.getKey(entity.getType()).toString().equals("conjurer_illager:conjurer")) {
-			replacementEntity = Compatibilities.THE_CONJURER.createFemaleConjurer(entity);
+			replacementEntity = TheConjurerCompatibility.INSTANCE.createFemaleConjurer(entity);
 		}
 
 		if (replacementEntity != null) {
