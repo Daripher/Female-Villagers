@@ -1,6 +1,8 @@
 package daripher.femalevillagers;
 
-import daripher.femalevillagers.compat.Compatibilities;
+import daripher.femalevillagers.compat.guardvillagers.GuardVillagersCompatibility;
+import daripher.femalevillagers.compat.theconjurer.TheConjurerCompatibility;
+import daripher.femalevillagers.compat.villagernames.VillagerNamesCompatibility;
 import daripher.femalevillagers.init.EntityInit;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -14,15 +16,15 @@ public class FemaleVillagersMod {
 		EntityInit.REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
 
 		if (ModList.get().isLoaded("villagernames")) {
-			Compatibilities.VILLAGER_NAMES.addCompatibility();
+			VillagerNamesCompatibility.INSTANCE.addCompatibility();
 		}
 
 		if (ModList.get().isLoaded("guardvillagers")) {
-			Compatibilities.GUARD_VILLAGERS.addCompatibility();
+			GuardVillagersCompatibility.INSTANCE.addCompatibility();
 		}
-		
+
 		if (ModList.get().isLoaded("conjurer_illager")) {
-			Compatibilities.THE_CONJURER.addCompatibility();
+			TheConjurerCompatibility.INSTANCE.addCompatibility();
 		}
 	}
 }

@@ -18,7 +18,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 
-public class TheConjurerCompatibility {
+public enum TheConjurerCompatibility {
+	INSTANCE;
+
 	private static final ResourceLocation FEMALE_CONJURER_ENTITY_ID = new ResourceLocation(FemaleVillagersMod.MOD_ID, "female_conjurer");
 
 	public void addCompatibility() {

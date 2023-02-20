@@ -39,7 +39,9 @@ import tallestegg.guardvillagers.GuardEntityType;
 import tallestegg.guardvillagers.configuration.GuardConfig;
 import tallestegg.guardvillagers.entities.Guard;
 
-public class GuardVillagersCompatibility {
+public enum GuardVillagersCompatibility {
+	INSTANCE;
+
 	private static final ResourceLocation FEMALE_GUARD_ENTITY_ID = new ResourceLocation(FemaleVillagersMod.MOD_ID, "female_guard");
 
 	public void addCompatibility() {

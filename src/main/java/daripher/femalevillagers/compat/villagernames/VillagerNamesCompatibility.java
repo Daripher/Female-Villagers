@@ -38,7 +38,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class VillagerNamesCompatibility {
+public enum VillagerNamesCompatibility {
+	INSTANCE;
+
 	private static List<String> customFemaleNames = null;
 
 	public void addCompatibility() {
