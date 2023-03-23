@@ -15,6 +15,7 @@ import daripher.femalevillagers.entity.FemaleZombieVillager;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.monster.Illusioner;
 import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.world.entity.monster.Vindicator;
 import net.minecraft.world.entity.monster.ZombieVillager;
@@ -101,7 +102,9 @@ public class FemaleVillagerEvents {
 		}
 
 		if (entity.getType() == EntityType.ILLUSIONER) {
+			var replacedEntity = (Illusioner) entity;
 			replacementEntity = new FemaleIllusioner(entity.level);
+			replacementEntity.setItemSlot(EquipmentSlot.MAINHAND, replacedEntity.getItemBySlot(EquipmentSlot.MAINHAND));
 		}
 
 		if (EntityType.getKey(entity.getType()).toString().equals("guardvillagers:guard")) {
