@@ -1,31 +1,27 @@
 package daripher.femalevillagers.client.render;
 
+import java.util.function.Predicate;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import daripher.femalevillagers.FemaleVillagersMod;
 import daripher.femalevillagers.client.model.FemaleIllagerModel;
+import daripher.femalevillagers.client.render.layer.HideableItemInHandLayer;
 import daripher.femalevillagers.entity.FemaleIllusioner;
 import net.minecraft.client.model.IllagerModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.IllagerRenderer;
-import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class FemaleIllusionerRenderer extends IllagerRenderer<FemaleIllusioner> {
 	private static final ResourceLocation SKIN_LOCATION = new ResourceLocation(FemaleVillagersMod.MOD_ID, "textures/entity/female_illusioner.png");
+	private static final Predicate<FemaleIllusioner> SHOULD_SHOW_ITEM_IN_HAND = e -> e.isCastingSpell() || e.isAggressive();
 
 	public FemaleIllusionerRenderer(EntityRendererProvider.Context context) {
 		super(context, new IllagerModel<>(context.bakeLayer(FemaleIllagerModel.LAYER_LOCATION)), 0.5F);
-		addLayer(new ItemInHandLayer<FemaleIllusioner, IllagerModel<FemaleIllusioner>>(this, context.getItemInHandRenderer()) {
-			public void render(PoseStack p_116352_, MultiBufferSource p_116353_, int p_116354_, FemaleIllusioner entity, float p_116356_, float p_116357_,
-					float p_116358_, float p_116359_, float p_116360_, float p_116361_) {
-				if (entity.isCastingSpell() || entity.isAggressive()) {
-					super.render(p_116352_, p_116353_, p_116354_, entity, p_116356_, p_116357_, p_116358_, p_116359_, p_116360_, p_116361_);
-				}
-			}
-		});
+		addLayer(new HideableItemInHandLayer<>(this, context.getItemInHandRenderer(), SHOULD_SHOW_ITEM_IN_HAND));
 		model.getHat().visible = true;
 	}
 
