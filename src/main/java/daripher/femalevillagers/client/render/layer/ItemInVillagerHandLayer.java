@@ -24,7 +24,7 @@ public class ItemInVillagerHandLayer<T extends LivingEntity, M extends EntityMod
 	}
 
 	public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float entityAge, float netHeadYaw, float headPitch) {
-		if (Config.COMMON.useDefaultVillagerArmPose.get()) {
+		if (Config.COMMON.useDefaultVillagerArms.get()) {
 			itemInCrossedHandsLayer.render(poseStack, bufferSource, packedLight, entity, limbSwing, limbSwingAmount, partialTicks, entityAge, netHeadYaw, headPitch);
 		} else {
 			itemInNormalHandsLayer.render(poseStack, bufferSource, packedLight, entity, limbSwing, limbSwingAmount, partialTicks, entityAge, netHeadYaw, headPitch);

@@ -44,7 +44,7 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 		body = root.getChild("body");
 		arms = root.getChild("arms");
 
-		if (Config.COMMON.useDefaultVillagerArmPose.get()) {
+		if (Config.COMMON.useDefaultVillagerArms.get()) {
 			leftArm.visible = false;
 			rightArm.visible = false;
 		} else {
