@@ -55,7 +55,7 @@ public enum VillagerNamesCompatibility {
 		}
 
 		var isFemale = isFemaleEntity(event.getEntity());
-		var entityName = getRandomName(isFemale);
+		var entityName = getRandomVillagerName(isFemale);
 		EntityFunctions.nameEntity(event.getEntity(), entityName);
 	}
 
@@ -130,11 +130,11 @@ public enum VillagerNamesCompatibility {
 		var configFile = new File(configDirectoryPath + File.separator + "customfemalenames.txt");
 
 		if (configDirectory.isDirectory() && configFile.isFile()) {
-			var customNames = readCustomNames(configDirectoryPath);
+			var customNames = readCustomFemaleNames(configDirectoryPath);
 			customFemaleNames = Arrays.asList(customNames);
 		} else {
 			configDirectory.mkdirs();
-			writeCustomNames(configDirectoryPath);
+			writeCustomFemaleNames(configDirectoryPath);
 			customFemaleNames = new ArrayList<>(Arrays.asList("Olivia", "Emma", "Charlotte"));
 		}
 	}
@@ -181,15 +181,15 @@ public enum VillagerNamesCompatibility {
 		return ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()).getNamespace().equals(FemaleVillagersMod.MOD_ID);
 	}
 
-	private String getRandomName(boolean isFemale) {
+	private String getRandomVillagerName(boolean isFemale) {
 		var usePredefinedNames = isFemale ? ConfigHandler._useFemaleNames : ConfigHandler._useMaleNames;
 		var useCustomNames = ConfigHandler._useCustomNames;
 		var predefinedNames = isFemale ? GlobalVariables.femalenames : GlobalVariables.malenames;
 		var customNames = isFemale ? customFemaleNames : Names.customnames;
-		return getRandomName(usePredefinedNames, useCustomNames, predefinedNames, customNames);
+		return getRandomVillagerName(usePredefinedNames, useCustomNames, predefinedNames, customNames);
 	}
 
-	private String getRandomName(boolean usePredefinedNames, boolean useCustomNames, List<String> predefinedNames, List<String> customNames) {
+	private String getRandomVillagerName(boolean usePredefinedNames, boolean useCustomNames, List<String> predefinedNames, List<String> customNames) {
 		List<String> names = null;
 
 		if (usePredefinedNames) {
@@ -212,7 +212,7 @@ public enum VillagerNamesCompatibility {
 		return StringFunctions.capitalizeEveryWord(name);
 	}
 
-	private String[] readCustomNames(String configDirectoryPath) {
+	private String[] readCustomFemaleNames(String configDirectoryPath) {
 		String customNamesString = null;
 
 		try {
@@ -225,7 +225,7 @@ public enum VillagerNamesCompatibility {
 		return customNamesString.split(",");
 	}
 
-	private void writeCustomNames(String configDirectoryPath) {
+	private void writeCustomFemaleNames(String configDirectoryPath) {
 		PrintWriter writer = null;
 
 		try {
@@ -239,5 +239,4 @@ public enum VillagerNamesCompatibility {
 		writer.println("Charlotte");
 		writer.close();
 	}
-
 }
