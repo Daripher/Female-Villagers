@@ -9,6 +9,7 @@ import daripher.femalevillagers.compat.guardvillagers.client.model.FemaleGuardAr
 import daripher.femalevillagers.compat.guardvillagers.client.model.FemaleGuardModel;
 import daripher.femalevillagers.compat.guardvillagers.entity.FemaleGuard;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.HumanoidModel.ArmPose;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
@@ -23,8 +24,7 @@ import net.minecraft.world.item.UseAnim;
 public class FemaleGuardRenderer extends HumanoidMobRenderer<FemaleGuard, HumanoidModel<FemaleGuard>> {
 	public FemaleGuardRenderer(EntityRendererProvider.Context context) {
 		super(context, new FemaleGuardModel(context.bakeLayer(FemaleGuardModel.LAYER_LOCATION)), 0.5F);
-		addLayer(new HumanoidArmorLayer<>(this,
-				new FemaleGuardArmorModel(context.bakeLayer(FemaleGuardArmorModel.INNER_LAYER_LOCATION)),
+		addLayer(new HumanoidArmorLayer<>(this, new FemaleGuardArmorModel(context.bakeLayer(FemaleGuardArmorModel.INNER_LAYER_LOCATION)),
 				new FemaleGuardArmorModel(context.bakeLayer(FemaleGuardArmorModel.OUTER_LAYER_LOCATION))));
 	}
 
@@ -61,34 +61,16 @@ public class FemaleGuardRenderer extends HumanoidMobRenderer<FemaleGuard, Humano
 
 			if (entity.getUseItemRemainingTicks() > 0) {
 				var useAnimation = itemInHand.getUseAnimation();
-
-				switch (useAnimation) {
-					case BLOCK:
-						armPose = HumanoidModel.ArmPose.BLOCK;
-						break;
-					case BOW:
-						armPose = HumanoidModel.ArmPose.BOW_AND_ARROW;
-						break;
-					case SPEAR:
-						armPose = HumanoidModel.ArmPose.THROW_SPEAR;
-						break;
-					case CROSSBOW:
-						if (hand == entity.getUsedItemHand()) {
-							armPose = HumanoidModel.ArmPose.CROSSBOW_CHARGE;
-						}
-						break;
-					default:
-						armPose = HumanoidModel.ArmPose.EMPTY;
-						break;
-				}
+				armPose = getArmPoseForAnimation(useAnimation, hand == entity.getUsedItemHand());
 			} else {
 				var hasCrossbowInMainHand = mainHandItem.getItem() instanceof CrossbowItem;
-				var hasCrossbowInOffhand = offhandItem.getItem() instanceof CrossbowItem;
-
+				
 				if (hasCrossbowInMainHand && entity.isAggressive()) {
 					armPose = HumanoidModel.ArmPose.CROSSBOW_HOLD;
 				}
-
+				
+				var hasCrossbowInOffhand = offhandItem.getItem() instanceof CrossbowItem;
+				
 				if (hasCrossbowInOffhand && mainHandItem.getItem().getUseAnimation(mainHandItem) == UseAnim.NONE && entity.isAggressive()) {
 					armPose = HumanoidModel.ArmPose.CROSSBOW_HOLD;
 				}
@@ -96,6 +78,23 @@ public class FemaleGuardRenderer extends HumanoidMobRenderer<FemaleGuard, Humano
 		}
 
 		return armPose;
+	}
+
+	public ArmPose getArmPoseForAnimation(UseAnim useAnimation, boolean usingMainHand) {
+		return switch (useAnimation) {
+			case BLOCK:
+				yield HumanoidModel.ArmPose.BLOCK;
+			case BOW:
+				yield HumanoidModel.ArmPose.BOW_AND_ARROW;
+			case SPEAR:
+				yield HumanoidModel.ArmPose.THROW_SPEAR;
+			case CROSSBOW:
+				if (usingMainHand) {
+					yield HumanoidModel.ArmPose.CROSSBOW_CHARGE;
+				}
+			default:
+				yield HumanoidModel.ArmPose.EMPTY;
+		};
 	}
 
 	@Override
