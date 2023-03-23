@@ -11,11 +11,11 @@ public class Config {
 
 	public static class Common {
 		public final ConfigValue<Boolean> hideVillagerNoses;
-		public final ConfigValue<Boolean> useDefaultVillagerArmPose;
+		public final ConfigValue<Boolean> useDefaultVillagerArms;
 
 		public Common(ForgeConfigSpec.Builder builder) {
 			hideVillagerNoses = builder.define("hide_villager_noses", false);
-			useDefaultVillagerArmPose = builder.define("hide_villager_noses", false);
+			useDefaultVillagerArms = builder.define("use_default_villagers_arms", false);
 		}
 	}
 
