@@ -18,16 +18,14 @@ public class MixinVillagerMakeLove {
 		var villagerBrain = villager.getBrain();
 		var optionalBreedTarget = villagerBrain.getMemory(MemoryModuleType.BREED_TARGET).filter(m -> m.getType() == EntityType.VILLAGER);
 
-		if (optionalBreedTarget.isPresent()) {
-			var breedTarget = optionalBreedTarget.get();
+		optionalBreedTarget.ifPresent(breedTarget -> {
+			var isVillagerFemale = villager instanceof FemaleVillager;
+			var isTargetFemale = breedTarget instanceof FemaleVillager;
 
-			if (villager instanceof FemaleVillager && breedTarget instanceof FemaleVillager) {
+			// can't breed if both female or if both male
+			if (isVillagerFemale == isTargetFemale) {
 				callbackInfo.setReturnValue(false);
 			}
-
-			if (!(villager instanceof FemaleVillager) && !(breedTarget instanceof FemaleVillager)) {
-				callbackInfo.setReturnValue(false);
-			}
-		}
+		});
 	}
 }
