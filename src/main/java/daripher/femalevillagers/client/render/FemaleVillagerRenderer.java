@@ -4,10 +4,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import daripher.femalevillagers.FemaleVillagersMod;
 import daripher.femalevillagers.client.model.FemaleVillagerModel;
+import daripher.femalevillagers.client.render.layer.ItemInVillagerHandLayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
-import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.client.renderer.entity.layers.VillagerProfessionLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.Villager;
@@ -19,7 +19,7 @@ public class FemaleVillagerRenderer extends MobRenderer<Villager, FemaleVillager
 		super(context, new FemaleVillagerModel<>(context.bakeLayer(FemaleVillagerModel.LAYER_LOCATION)), 0.5F);
 		addLayer(new CustomHeadLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
 		addLayer(new VillagerProfessionLayer<>(this, context.getResourceManager(), "villager"));
-		addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
+		addLayer(new ItemInVillagerHandLayer<>(this, context.getItemInHandRenderer()));
 	}
 
 	@Override

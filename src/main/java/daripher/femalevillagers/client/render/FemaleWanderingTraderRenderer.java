@@ -4,11 +4,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import daripher.femalevillagers.FemaleVillagersMod;
 import daripher.femalevillagers.client.model.FemaleVillagerModel;
+import daripher.femalevillagers.client.render.layer.ItemInVillagerHandLayer;
 import daripher.femalevillagers.entity.FemaleWanderingTrader;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
-import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.resources.ResourceLocation;
 
 public class FemaleWanderingTraderRenderer extends MobRenderer<FemaleWanderingTrader, FemaleVillagerModel<FemaleWanderingTrader>> {
@@ -17,7 +17,7 @@ public class FemaleWanderingTraderRenderer extends MobRenderer<FemaleWanderingTr
 	public FemaleWanderingTraderRenderer(EntityRendererProvider.Context context) {
 		super(context, new FemaleVillagerModel<>(context.bakeLayer(FemaleVillagerModel.LAYER_LOCATION)), 0.5F);
 		addLayer(new CustomHeadLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
-		addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
+		addLayer(new ItemInVillagerHandLayer<>(this, context.getItemInHandRenderer()));
 	}
 
 	@Override
