@@ -26,7 +26,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = FemaleVillagersMod.MOD_ID)
-public class FemaleVillagerEvents {
+public class FemaleVillagersEvents {
 	@SubscribeEvent
 	public static void replaceVillagerWithFemaleVersion(EntityJoinLevelEvent event) {
 		if (event.getEntity().getTags().contains("do_not_replace")) {
