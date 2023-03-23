@@ -3,6 +3,7 @@ package daripher.femalevillagers.client.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import daripher.femalevillagers.FemaleVillagersMod;
+import daripher.femalevillagers.config.Config;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.VillagerModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -28,6 +29,7 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 	protected final ModelPart leftLeg;
 	protected final ModelPart nose;
 	protected final ModelPart body;
+	protected final ModelPart arms;
 
 	public FemaleVillagerModel(ModelPart root) {
 		super(root);
@@ -40,13 +42,21 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 		rightLeg = root.getChild("right_leg");
 		leftLeg = root.getChild("left_leg");
 		body = root.getChild("body");
+		arms = root.getChild("arms");
+
+		if (Config.COMMON.useDefaultVillagerArmPose.get()) {
+			leftArm.visible = false;
+			rightArm.visible = false;
+		} else {
+			arms.visible = false;
+		}
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshDefinition = VillagerModel.createBodyModel();
 		var root = meshDefinition.getRoot();
-		root.addOrReplaceChild("arms", CubeListBuilder.create().texOffs(40, 38).addBox(-4F, 4F, -1.5F, 8F, 3F, 4F).texOffs(44, 22).addBox(-7F, -1F, -1.5F, 3F, 8F, 4F).texOffs(44, 22).mirror().addBox(4F, -1F, -1.5F, 3F, 8F, 4F),
-				PartPose.offsetAndRotation(0F, 4F, 0F, -0.7854F, 0F, 0F));
+		root.addOrReplaceChild("arms", CubeListBuilder.create().texOffs(40, 38).addBox(-4F, 4F, -1.5F, 8F, 3F, 4F, new CubeDeformation(-0.01F)).texOffs(44, 22).addBox(-6.5F, -1F, -1.5F, 3F, 8F, 4F).texOffs(44, 22).mirror()
+				.addBox(3.5F, -1F, -1.5F, 3F, 8F, 4F), PartPose.offsetAndRotation(0F, 4F, 0F, -0.7854F, 0F, 0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-2.2F, 0F, -2F, 4F, 12F, 4F, new CubeDeformation(-0.2F)), PartPose.offset(2F, 12F, 0F));
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 22).addBox(-1.8F, 0F, -2F, 4F, 12F, 4F, new CubeDeformation(-0.2F)), PartPose.offset(-2F, 12F, 0F));
 		var head = root.getChild("head");
