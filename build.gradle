@@ -114,6 +114,9 @@ dependencies {
 	implementation fg.deobf("curse.maven:guard-villagers-360203:3823106")
 	implementation fg.deobf("curse.maven:the-conjurer-377798:3749502")
 	implementation fg.deobf("curse.maven:structure-gel-api-378802:4018606")
+	implementation fg.deobf("curse.maven:vampirism-become-a-vampire-233029:4082397")
+	implementation fg.deobf("curse.maven:etched-491890:3931285")
+	implementation fg.deobf("curse.maven:pollen-544350:4337349")
 }
 
 jar {
