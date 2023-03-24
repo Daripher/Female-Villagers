@@ -64,7 +64,7 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 		hat.addOrReplaceChild("hat_rim", CubeListBuilder.create().texOffs(30, 47).addBox(-8F, -8F, -6F, 16F, 16F, 1F, new CubeDeformation(0.3F)), PartPose.rotation(-1.5708F, 0F, 0F));
 		head.addOrReplaceChild("nose", CubeListBuilder.create().texOffs(24, 0).addBox(-1F, -1F, -5.25F, 2F, 4F, 2F, new CubeDeformation(-0.4F)), PartPose.offset(0F, -2F, 0F));
 		var body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 20).addBox(-4F, 0F, -3F, 8F, 12F, 6F, new CubeDeformation(-0.45F)), PartPose.ZERO);
-		body.addOrReplaceChild("jacket", CubeListBuilder.create().texOffs(0, 38).addBox(-4F, 0F, -3F, 8F, 20F, 6F, new CubeDeformation(0.05F)), PartPose.ZERO);
+		body.addOrReplaceChild("jacket", CubeListBuilder.create().texOffs(0, 38).addBox(-4F, 0F, -3F, 8F, 18F, 6F, new CubeDeformation(0.05F)), PartPose.offset(0F, 1F, 0F));
 		var breast = body.addOrReplaceChild("breast", CubeListBuilder.create(), PartPose.offsetAndRotation(0F, 2F, -3F, 0.1309F, 0F, 0F));
 		breast.addOrReplaceChild("breast_overlay", CubeListBuilder.create().texOffs(4, 42).addBox(-4F, 0F, 0F, 8F, 5F, 2F, new CubeDeformation(-0.2F)).texOffs(18, 29).mirror()
 				.addBox(-4F, 3.25F, 0F, 8F, 2F, 4F, new CubeDeformation(-0.51F)).texOffs(19, 24).addBox(-4F, 0F, 0F, 8F, 5F, 3F, new CubeDeformation(-0.5F)), PartPose.rotation(-0.48F, 0F, 0F));
