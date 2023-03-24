@@ -89,8 +89,8 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 	}
 
 	@Override
-	public void setupAnim(T villager, float p_104054_, float p_104055_, float p_104056_, float p_104057_, float p_104058_) {
-		super.setupAnim(villager, p_104054_, p_104055_, p_104056_, p_104057_, p_104058_);
+	public void setupAnim(T villager, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(villager, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		var isFalling = villager.getFallFlyingTicks() > 4;
 		var f = 1F;
 
@@ -104,8 +104,8 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 			f = 1;
 		}
 
-		rightArm.xRot = Mth.cos(p_104054_ * 0.6662F + (float) Math.PI) * 2 * p_104055_ * 0.5F / f;
-		leftArm.xRot = Mth.cos(p_104054_ * 0.6662F) * 2 * p_104055_ * 0.5F / f;
+		rightArm.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 2 * limbSwingAmount * 0.5F / f;
+		leftArm.xRot = Mth.cos(limbSwing * 0.6662F) * 2 * limbSwingAmount * 0.5F / f;
 		head.y = 2F;
 	}
 
