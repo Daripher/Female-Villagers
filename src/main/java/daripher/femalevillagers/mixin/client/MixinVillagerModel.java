@@ -29,9 +29,12 @@ public class MixinVillagerModel implements ArmedModel {
 
 	@Inject(method = "<init>(Lnet/minecraft/client/model/geom/ModelPart;)V", at = @At("TAIL"))
 	private void inject_constructor(ModelPart root, CallbackInfo callbackInfo) {
-		rightArm = root.getChild("right_arm");
-		leftArm = root.getChild("left_arm");
-		arms = root.getChild("arms");
+		try {
+			rightArm = root.getChild("right_arm");
+			leftArm = root.getChild("left_arm");
+			arms = root.getChild("arms");
+		} catch (Exception e) {
+		}
 	}
 
 	@Inject(method = "createBodyModel", at = @At("RETURN"))
@@ -60,6 +63,10 @@ public class MixinVillagerModel implements ArmedModel {
 
 	@Inject(method = "setupAnim", at = @At("TAIL"))
 	private void inject_setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo callbackInfo) {
+		if (rightArm == null) {
+			return;
+		}
+
 		if (!(entity instanceof Villager)) {
 			leftArm.visible = false;
 			rightArm.visible = false;
