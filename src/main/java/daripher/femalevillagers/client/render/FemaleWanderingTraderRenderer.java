@@ -17,7 +17,7 @@ public class FemaleWanderingTraderRenderer extends MobRenderer<FemaleWanderingTr
 	public FemaleWanderingTraderRenderer(EntityRendererProvider.Context context) {
 		super(context, new FemaleVillagerModel<>(context.bakeLayer(FemaleVillagerModel.LAYER_LOCATION)), 0.5F);
 		addLayer(new CustomHeadLayer<>(this, context.getModelSet()));
-		addLayer(new ItemInVillagerHandLayer<>(this, context.getItemInHandRenderer()));
+		addLayer(new ItemInVillagerHandLayer<>(this));
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class FemaleConjurerRenderer extends IllagerRenderer<FemaleConjurer> {
 	public FemaleConjurerRenderer(Context context) {
 		super(context, new FemaleConjurerModel(context.bakeLayer(FemaleConjurerModel.LAYER_LOCATION)), 0.5F);
 //		addLayer(new ConjurerSunglassesLayer(this, new FemaleConjurerModel(context.bakeLayer(IllagerRenderRefs.CONJURER_GLASSES))));
-		addLayer(new HideableItemInHandLayer<>(this, context.getItemInHandRenderer(), SHOULD_SHOW_ITEM_IN_HAND));
+		addLayer(new HideableItemInHandLayer<>(this, SHOULD_SHOW_ITEM_IN_HAND));
 		model.getHat().visible = true;
 	}
 

@@ -21,7 +21,7 @@ public class FemaleIllusionerRenderer extends IllagerRenderer<FemaleIllusioner> 
 
 	public FemaleIllusionerRenderer(EntityRendererProvider.Context context) {
 		super(context, new IllagerModel<>(context.bakeLayer(FemaleIllagerModel.LAYER_LOCATION)), 0.5F);
-		addLayer(new HideableItemInHandLayer<>(this, context.getItemInHandRenderer(), SHOULD_SHOW_ITEM_IN_HAND));
+		addLayer(new HideableItemInHandLayer<>(this, SHOULD_SHOW_ITEM_IN_HAND));
 		model.getHat().visible = true;
 	}
 

@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import daripher.femalevillagers.config.Config;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.CrossedArmsItemLayer;
@@ -17,10 +16,10 @@ public class ItemInVillagerHandLayer<T extends LivingEntity, M extends EntityMod
 	private final ItemInHandLayer<T, M> itemInNormalHandsLayer;
 	private final CrossedArmsItemLayer<T, M> itemInCrossedHandsLayer;
 
-	public ItemInVillagerHandLayer(RenderLayerParent<T, M> parent, ItemInHandRenderer itemInHandRenderer) {
+	public ItemInVillagerHandLayer(RenderLayerParent<T, M> parent) {
 		super(parent);
-		itemInNormalHandsLayer = new ItemInHandLayer<>(parent, itemInHandRenderer);
-		itemInCrossedHandsLayer = new CrossedArmsItemLayer<>(parent, itemInHandRenderer);
+		itemInNormalHandsLayer = new ItemInHandLayer<>(parent);
+		itemInCrossedHandsLayer = new CrossedArmsItemLayer<>(parent);
 	}
 
 	public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float entityAge, float netHeadYaw, float headPitch) {

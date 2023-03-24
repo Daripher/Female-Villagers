@@ -19,7 +19,7 @@ public class FemaleVillagerRenderer extends MobRenderer<Villager, FemaleVillager
 		super(context, new FemaleVillagerModel<>(context.bakeLayer(FemaleVillagerModel.LAYER_LOCATION)), 0.5F);
 		addLayer(new CustomHeadLayer<>(this, context.getModelSet()));
 		addLayer(new VillagerProfessionLayer<>(this, context.getResourceManager(), "villager"));
-		addLayer(new ItemInVillagerHandLayer<>(this, context.getItemInHandRenderer()));
+		addLayer(new ItemInVillagerHandLayer<>(this));
 	}
 
 	@Override
