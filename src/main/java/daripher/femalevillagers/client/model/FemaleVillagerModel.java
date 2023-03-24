@@ -53,13 +53,13 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 	}
 
 	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshDefinition = VillagerModel.createBodyModel();
+		MeshDefinition meshDefinition = new MeshDefinition();
 		var root = meshDefinition.getRoot();
 		root.addOrReplaceChild("arms", CubeListBuilder.create().texOffs(40, 38).addBox(-4F, 4F, -1.5F, 8F, 3F, 4F, new CubeDeformation(-0.01F)).texOffs(44, 22).addBox(-6.5F, -1F, -1.5F, 3F, 8F, 4F).texOffs(44, 22).mirror()
 				.addBox(3.5F, -1F, -1.5F, 3F, 8F, 4F), PartPose.offsetAndRotation(0F, 4F, 0F, -0.7854F, 0F, 0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create().texOffs(0, 22).mirror().addBox(-2.2F, 0F, -2F, 4F, 12F, 4F, new CubeDeformation(-0.2F)), PartPose.offset(2F, 12F, 0F));
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create().texOffs(0, 22).addBox(-1.8F, 0F, -2F, 4F, 12F, 4F, new CubeDeformation(-0.2F)), PartPose.offset(-2F, 12F, 0F));
-		var head = root.getChild("head");
+		var head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4F, -10F, -4F, 8F, 10F, 8F), PartPose.ZERO);
 		var hat = head.addOrReplaceChild("hat", CubeListBuilder.create().texOffs(32, 0).addBox(-4F, -10F, -4F, 8F, 10F, 8F, new CubeDeformation(0.3F)), PartPose.ZERO);
 		hat.addOrReplaceChild("hat_rim", CubeListBuilder.create().texOffs(30, 47).addBox(-8F, -8F, -6F, 16F, 16F, 1F, new CubeDeformation(0.3F)), PartPose.rotation(-1.5708F, 0F, 0F));
 		head.addOrReplaceChild("nose", CubeListBuilder.create().texOffs(24, 0).addBox(-1F, -1F, -5.25F, 2F, 4F, 2F, new CubeDeformation(-0.4F)), PartPose.offset(0F, -2F, 0F));

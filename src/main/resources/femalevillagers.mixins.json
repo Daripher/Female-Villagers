@@ -8,6 +8,8 @@
   	"MixinZombieVillager"
   ],
   "client": [
+  	"client.MixinVillagerModel",
+  	"client.MixinVillagerRenderer"
   ],
   "injectors": {
     "defaultRequire": 1
