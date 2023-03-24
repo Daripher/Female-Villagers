@@ -32,13 +32,6 @@ public class MixinVillagerModel implements ArmedModel {
 		rightArm = root.getChild("right_arm");
 		leftArm = root.getChild("left_arm");
 		arms = root.getChild("arms");
-
-		if (Config.COMMON.useDefaultVillagerArms.get()) {
-			leftArm.visible = false;
-			rightArm.visible = false;
-		} else {
-			arms.visible = false;
-		}
 	}
 
 	@Inject(method = "createBodyModel", at = @At("RETURN"))
@@ -72,6 +65,13 @@ public class MixinVillagerModel implements ArmedModel {
 			rightArm.visible = false;
 			arms.visible = true;
 			return;
+		}
+
+		if (Config.COMMON.useDefaultVillagerArms.get()) {
+			leftArm.visible = false;
+			rightArm.visible = false;
+		} else {
+			arms.visible = false;
 		}
 
 		var villager = (Villager) entity;
