@@ -2,6 +2,7 @@ package daripher.femalevillagers;
 
 import daripher.femalevillagers.compat.guardvillagers.GuardVillagersCompatibility;
 import daripher.femalevillagers.compat.theconjurer.TheConjurerCompatibility;
+import daripher.femalevillagers.compat.vampirism.VampirismCompatibility;
 import daripher.femalevillagers.compat.villagernames.VillagerNamesCompatibility;
 import daripher.femalevillagers.config.Config;
 import daripher.femalevillagers.init.EntityInit;
@@ -29,6 +30,10 @@ public class FemaleVillagersMod {
 
 		if (ModList.get().isLoaded("conjurer_illager")) {
 			TheConjurerCompatibility.INSTANCE.addCompatibility();
+		}
+
+		if (ModList.get().isLoaded("vampirism")) {
+			VampirismCompatibility.INSTANCE.addCompatibility();
 		}
 	}
 }

@@ -1,0 +1,2 @@
+multiplier=10
+femalevillagers:female_villager=15

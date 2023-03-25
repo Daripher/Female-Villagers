@@ -19,7 +19,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class RendererInit {
 	@SubscribeEvent
 	public static void registerEntityRenderers(FMLClientSetupEvent event) {
-		EntityRenderers.register(EntityInit.FEMALE_VILLAGER.get(), FemaleVillagerRenderer::new);
+		EntityRenderers.register(EntityInit.FEMALE_VILLAGER.get(), ctx -> new FemaleVillagerRenderer(ctx, "female_villager"));
 		EntityRenderers.register(EntityInit.FEMALE_ZOMBIE_VILLAGER.get(), FemaleZombieVillagerRenderer::new);
 		EntityRenderers.register(EntityInit.FEMALE_WANDERING_TRADER.get(), FemaleWanderingTraderRenderer::new);
 		EntityRenderers.register(EntityInit.FEMALE_PILLAGER.get(), ctx -> new FemaleIllagerRenderer<>(ctx, "female_pillager"));

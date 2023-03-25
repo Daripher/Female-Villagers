@@ -14,10 +14,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.Villager;
 
 public class FemaleVillagerRenderer extends MobRenderer<Villager, FemaleVillagerModel<Villager>> {
-	private static final ResourceLocation SKIN_LOCATION = new ResourceLocation(FemaleVillagersMod.MOD_ID, "textures/entity/female_villager.png");
+	private final ResourceLocation textureLocation;
 
-	public FemaleVillagerRenderer(EntityRendererProvider.Context context) {
+	public FemaleVillagerRenderer(EntityRendererProvider.Context context, String texture) {
 		super(context, new FemaleVillagerModel<>(context.bakeLayer(FemaleVillagerModel.MAIN_LAYER_LOCATION)), 0.5F);
+		this.textureLocation = new ResourceLocation(FemaleVillagersMod.MOD_ID, "textures/entity/" + texture + ".png");
 		addLayer(new CustomHeadLayer<>(this, context.getModelSet()));
 		addLayer(new VillagerProfessionLayer<>(this, context.getResourceManager(), "villager"));
 		addLayer(new ItemInVillagerHandLayer<>(this));
@@ -26,7 +27,7 @@ public class FemaleVillagerRenderer extends MobRenderer<Villager, FemaleVillager
 
 	@Override
 	public ResourceLocation getTextureLocation(Villager villager) {
-		return SKIN_LOCATION;
+		return textureLocation;
 	}
 
 	@Override
