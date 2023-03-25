@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "femalevillagers:female_villager",
+      "value": 15
+    }
+  ]
+}
