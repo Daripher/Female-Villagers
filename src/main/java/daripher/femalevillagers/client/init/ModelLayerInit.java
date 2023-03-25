@@ -15,7 +15,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ModelLayerInit {
 	@SubscribeEvent
 	public static void registerModelLayers(FMLClientSetupEvent event) {
-		ForgeHooksClient.registerLayerDefinition(FemaleVillagerModel.LAYER_LOCATION, FemaleVillagerModel::createBodyLayer);
+		ForgeHooksClient.registerLayerDefinition(FemaleVillagerModel.MAIN_LAYER_LOCATION, FemaleVillagerModel::createBodyLayer);
+		ForgeHooksClient.registerLayerDefinition(FemaleVillagerModel.HAIR_LAYER_LOCATION, FemaleVillagerModel::createHairLayer);
 		ForgeHooksClient.registerLayerDefinition(FemaleZombieVillagerModel.LAYER_LOCATION, FemaleZombieVillagerModel::createBodyLayer);
 		ForgeHooksClient.registerLayerDefinition(FemaleIllagerModel.LAYER_LOCATION, FemaleIllagerModel::createBodyLayer);
 	}

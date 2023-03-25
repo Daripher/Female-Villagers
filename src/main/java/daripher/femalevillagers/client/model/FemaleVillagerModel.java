@@ -19,7 +19,9 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.npc.AbstractVillager;
 
 public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerModel<T> implements ArmedModel {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(FemaleVillagersMod.MOD_ID, "female_villager"), "main");
+	private static final ResourceLocation MODEL_ID = new ResourceLocation(FemaleVillagersMod.MOD_ID, "female_villager");
+	public static final ModelLayerLocation MAIN_LAYER_LOCATION = new ModelLayerLocation(MODEL_ID, "main");
+	public static final ModelLayerLocation HAIR_LAYER_LOCATION = new ModelLayerLocation(MODEL_ID, "hair");
 	protected final ModelPart rightArm;
 	protected final ModelPart leftArm;
 	protected final ModelPart head;
@@ -53,6 +55,11 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 	}
 
 	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshDefinition = createBodyModel();
+		return LayerDefinition.create(meshDefinition, 64, 64);
+	}
+
+	public static MeshDefinition createBodyModel() {
 		MeshDefinition meshDefinition = new MeshDefinition();
 		var root = meshDefinition.getRoot();
 		root.addOrReplaceChild("arms", CubeListBuilder.create().texOffs(40, 38).addBox(-4F, 4F, -1.5F, 8F, 3F, 4F, new CubeDeformation(-0.01F)).texOffs(44, 22).addBox(-6.5F, -1F, -1.5F, 3F, 8F, 4F).texOffs(44, 22).mirror()
@@ -65,7 +72,7 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 		head.addOrReplaceChild("nose", CubeListBuilder.create().texOffs(24, 0).addBox(-1F, -1F, -5.25F, 2F, 4F, 2F, new CubeDeformation(-0.4F)), PartPose.offset(0F, -2F, 0F));
 		var body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 20).addBox(-4F, 0F, -3F, 8F, 12F, 6F, new CubeDeformation(-0.45F)), PartPose.offset(0F, 2F, 0F));
 		body.addOrReplaceChild("jacket", CubeListBuilder.create().texOffs(0, 38).addBox(-4F, 0F, -3F, 8F, 18F, 6F, new CubeDeformation(0.05F)), PartPose.ZERO);
-		var breast = body.addOrReplaceChild("breast", CubeListBuilder.create(), PartPose.offsetAndRotation(0F, 0F, -3F, 0.1309F, 0F, 0F));
+		var breast = body.addOrReplaceChild("breast", CubeListBuilder.create(), PartPose.offsetAndRotation(0F, 0.5F, -3F, 0.1309F, 0F, 0F));
 		breast.addOrReplaceChild("breast_overlay", CubeListBuilder.create().texOffs(4, 42).addBox(-4F, 0F, 0F, 8F, 5F, 2F, new CubeDeformation(-0.2F)).texOffs(18, 29).mirror()
 				.addBox(-4F, 3.25F, 0F, 8F, 2F, 4F, new CubeDeformation(-0.51F)).texOffs(19, 24).addBox(-4F, 0F, 0F, 8F, 5F, 3F, new CubeDeformation(-0.5F)), PartPose.rotation(-0.48F, 0F, 0F));
 		breast.addOrReplaceChild("breast_bottom_overlay", CubeListBuilder.create().texOffs(2, 47).mirror().addBox(-4F, -0.5F, -1.5F, 8F, -1F, 4F, new CubeDeformation(-0.19F)),
@@ -85,7 +92,29 @@ public class FemaleVillagerModel<T extends AbstractVillager> extends VillagerMod
 		right_arm.addOrReplaceChild("cube_8", CubeListBuilder.create().texOffs(52, 38).addBox(-1.5F, -4F, -2F, 4F, 4F, 0F, new CubeDeformation(0.01F)), PartPose.offsetAndRotation(-0.5F, 7.5F, -2F, 1.5708F, 3.1416F, -1.5708F));
 		right_arm.addOrReplaceChild("cube_9", CubeListBuilder.create().texOffs(52, 38).mirror().addBox(-2.5F, -4F, -1F, 4F, 4F, 0F, new CubeDeformation(0.01F)),
 				PartPose.offsetAndRotation(-0.5F, 7.5F, -2F, 1.5708F, 3.1416F, 1.5708F));
+		return meshDefinition;
+	}
+
+	public static LayerDefinition createHairLayer() {
+		MeshDefinition meshDefinition = createBodyModel();
+		var root = meshDefinition.getRoot();
+		var head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4F, -10F, -4F, 8F, 10F, 8F, new CubeDeformation(-0.1F)), PartPose.offset(0F, 2.4F, 0F));
+		head.addOrReplaceChild("hat", CubeListBuilder.create().texOffs(32, 0).addBox(-4F, -10F, -4F, 8F, 10F, 8F, new CubeDeformation(0.2F)), PartPose.ZERO);
 		return LayerDefinition.create(meshDefinition, 64, 64);
+	}
+
+	public void copyPropertiesTo(FemaleVillagerModel<T> model) {
+		super.copyPropertiesTo(model);
+		model.rightArm.copyFrom(rightArm);
+		model.leftArm.copyFrom(leftArm);
+		model.head.copyFrom(head);
+		model.hat.copyFrom(hat);
+		model.hatRim.copyFrom(hatRim);
+		model.rightLeg.copyFrom(rightLeg);
+		model.leftLeg.copyFrom(leftLeg);
+		model.nose.copyFrom(nose);
+		model.body.copyFrom(body);
+		model.arms.copyFrom(arms);
 	}
 
 	@Override
