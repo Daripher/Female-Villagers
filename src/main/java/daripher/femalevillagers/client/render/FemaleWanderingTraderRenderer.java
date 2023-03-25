@@ -15,7 +15,7 @@ public class FemaleWanderingTraderRenderer extends MobRenderer<FemaleWanderingTr
 	private static final ResourceLocation SKIN_LOCATION = new ResourceLocation(FemaleVillagersMod.MOD_ID, "textures/entity/female_wandering_trader.png");
 
 	public FemaleWanderingTraderRenderer(EntityRendererProvider.Context context) {
-		super(context, new FemaleVillagerModel<>(context.bakeLayer(FemaleVillagerModel.LAYER_LOCATION)), 0.5F);
+		super(context, new FemaleVillagerModel<>(context.bakeLayer(FemaleVillagerModel.MAIN_LAYER_LOCATION)), 0.5F);
 		addLayer(new CustomHeadLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
 		addLayer(new ItemInVillagerHandLayer<>(this, context.getItemInHandRenderer()));
 	}
