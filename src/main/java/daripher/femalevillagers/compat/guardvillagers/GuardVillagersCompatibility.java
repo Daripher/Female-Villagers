@@ -8,8 +8,8 @@ import daripher.femalevillagers.compat.guardvillagers.entity.FemaleGuard;
 import daripher.femalevillagers.entity.FemaleVillager;
 import daripher.femalevillagers.init.EntityInit;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -80,7 +80,7 @@ public enum GuardVillagersCompatibility {
 	}
 
 	private void registerEntityType(RegisterEvent event) {
-		event.register(Registries.ENTITY_TYPE, FEMALE_GUARD_ENTITY_ID, FemaleGuard::createEntityType);
+		event.register(Registry.ENTITY_TYPE_REGISTRY, FEMALE_GUARD_ENTITY_ID, FemaleGuard::createEntityType);
 	}
 
 	private void attemptConvertingVillager(PlayerInteractEvent.EntityInteract event) {

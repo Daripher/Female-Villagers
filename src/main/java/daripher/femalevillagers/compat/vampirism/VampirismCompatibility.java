@@ -6,7 +6,7 @@ import daripher.femalevillagers.compat.vampirism.entity.FemaleConvertedVillager;
 import daripher.femalevillagers.init.EntityInit;
 import de.teamlapen.vampirism.api.VampirismAPI;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -42,7 +42,7 @@ public enum VampirismCompatibility {
 	}
 
 	private void registerEntityType(RegisterEvent event) {
-		event.register(Registries.ENTITY_TYPE, FEMALE_CONVERTED_VILLAGER_ENTITY_ID, this::createFemaleConvertedVillagerEntityType);
+		event.register(Registry.ENTITY_TYPE_REGISTRY, FEMALE_CONVERTED_VILLAGER_ENTITY_ID, this::createFemaleConvertedVillagerEntityType);
 	}
 
 	private EntityType<FemaleConvertedVillager> createFemaleConvertedVillagerEntityType() {

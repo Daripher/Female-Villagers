@@ -56,7 +56,7 @@ public class FemaleConvertedVillager extends ConvertedVillagerEntity {
 		VampirismAPI.getExtendedCreatureVampirism(newEntity).ifPresent(creature -> creature.setBlood(1));
 		net.minecraftforge.event.ForgeEventFactory.onLivingConvert(entity, newEntity);
 		newEntity.setVillagerData(getVillagerData());
-		newEntity.setGossips(getGossips().store(NbtOps.INSTANCE));
+		newEntity.setGossips(getGossips().store(NbtOps.INSTANCE).getValue());
 		newEntity.setOffers(getOffers());
 		newEntity.setVillagerXp(getVillagerXp());
 		UUID conversationStarter = ObfuscationReflectionHelper.getPrivateValue(ConvertedVillagerEntity.class, this, "conversationStarter");
