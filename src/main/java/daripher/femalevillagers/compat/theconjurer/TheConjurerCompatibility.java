@@ -7,7 +7,7 @@ import daripher.femalevillagers.compat.theconjurer.client.model.FemaleConjurerMo
 import daripher.femalevillagers.compat.theconjurer.client.render.FemaleConjurerRenderer;
 import daripher.femalevillagers.compat.theconjurer.entity.FemaleConjurer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -44,7 +44,7 @@ public enum TheConjurerCompatibility {
 	}
 
 	private void registerEntityType(RegisterEvent event) {
-		event.register(Registry.ENTITY_TYPE_REGISTRY, FEMALE_CONJURER_ENTITY_ID, FemaleConjurer::createEntityType);
+		event.register(Registries.ENTITY_TYPE, FEMALE_CONJURER_ENTITY_ID, FemaleConjurer::createEntityType);
 	}
 
 	private void registerRenderer(FMLClientSetupEvent event) {

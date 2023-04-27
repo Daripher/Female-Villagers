@@ -32,17 +32,17 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 @Mixin(ZombieVillager.class)
 public abstract class MixinZombieVillager extends Zombie implements VillagerDataHolder {
-	@Shadow private Tag gossips;
-	@Shadow private CompoundTag tradeOffers;
-	@Shadow private int villagerXp;
-	@Shadow private UUID conversionStarter;
+	private @Shadow Tag gossips;
+	private @Shadow CompoundTag tradeOffers;
+	private @Shadow int villagerXp;
+	private @Shadow UUID conversionStarter;
 
 	public MixinZombieVillager() {
 		super(null);
 	}
 
 	@Inject(method = "finishConversion", at = @At("HEAD"), cancellable = true)
-	private void inject_finishConversion(ServerLevel level, CallbackInfo callbackInfo) {
+	private void finishFemaleVillagerConversion(ServerLevel level, CallbackInfo callbackInfo) {
 		if ((Object) this instanceof FemaleZombieVillager) {
 			var femaleVillager = convertTo(EntityInit.FEMALE_VILLAGER.get(), false);
 
@@ -115,13 +115,13 @@ public abstract class MixinZombieVillager extends Zombie implements VillagerData
 			if (isPersistenceRequired()) {
 				convertedMob.setPersistenceRequired();
 			}
-			
+
 			if (canHaveEquipment) {
 				convertedMob.setCanPickUpLoot(this.canPickUpLoot());
 
 				for (var slot : EquipmentSlot.values()) {
 					ItemStack itemInSlot = getItemBySlot(slot);
-					
+
 					if (!itemInSlot.isEmpty()) {
 						convertedMob.setItemSlot(slot, itemInSlot.copy());
 						convertedMob.setDropChance(slot, getEquipmentDropChance(slot));
@@ -131,7 +131,7 @@ public abstract class MixinZombieVillager extends Zombie implements VillagerData
 			}
 
 			level.addFreshEntity(convertedMob);
-			
+
 			if (isPassenger()) {
 				var vehicle = getVehicle();
 				stopRiding();
