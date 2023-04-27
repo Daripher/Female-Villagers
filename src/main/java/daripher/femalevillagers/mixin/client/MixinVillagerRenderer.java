@@ -23,7 +23,7 @@ public abstract class MixinVillagerRenderer extends LivingEntityRenderer<Village
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Inject(method = "<init>(Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;)V", at = @At("TAIL"))
-	private void inject_constructor(EntityRendererProvider.Context ctx, CallbackInfo callbackInfo) {
+	private void replaceArmsLayer(EntityRendererProvider.Context ctx, CallbackInfo callbackInfo) {
 		layers.removeIf(Predicates.instanceOf(CrossedArmsItemLayer.class));
 		addLayer(new ItemInVillagerHandLayer(this, ctx.getItemInHandRenderer()));
 	}

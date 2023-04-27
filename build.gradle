@@ -23,7 +23,7 @@ apply plugin: 'org.spongepowered.mixin'
 
 version = '1.6'
 group = 'daripher.femalevillagers'
-archivesBaseName = 'FemaleVillagers-1.19.2'
+archivesBaseName = 'FemaleVillagers-1.19.3'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -33,7 +33,7 @@ mixin {
 }
 
 minecraft {
-    mappings channel: 'official', version: '1.19.2'
+    mappings channel: 'official', version: '1.19.3'
 
     runs {
         client {
@@ -107,18 +107,18 @@ repositories {
 }
 
 dependencies {
-	minecraft 'net.minecraftforge:forge:1.19.2-43.2.0'
+	minecraft 'net.minecraftforge:forge:1.19.3-44.1.23'
 	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-	implementation fg.deobf("curse.maven:villager-names-345854:4325281")
-	implementation fg.deobf("curse.maven:collective-342584:4361320")
-	implementation fg.deobf("curse.maven:guard-villagers-360203:3970122")
-	implementation fg.deobf("curse.maven:the-conjurer-377798:4069328")
-	implementation fg.deobf("curse.maven:structure-gel-api-378802:4029363")
-	implementation fg.deobf("curse.maven:vampirism-become-a-vampire-233029:4435491")
-	implementation fg.deobf("curse.maven:ad-astra-635042:4452052")
-	implementation fg.deobf("curse.maven:resourceful-lib-570073:4434139")
-	implementation fg.deobf("curse.maven:botarium-704113:4306551")
-	implementation fg.deobf("curse.maven:resourceful-config-714059:4444198")
+	implementation fg.deobf("curse.maven:villager-names-345854:4421768")
+	implementation fg.deobf("curse.maven:collective-342584:4436954")
+	implementation fg.deobf("curse.maven:guard-villagers-360203:4432661")
+	implementation fg.deobf("curse.maven:the-conjurer-377798:4351580")
+	implementation fg.deobf("curse.maven:structure-gel-api-378802:4380590")
+	implementation fg.deobf("curse.maven:vampirism-become-a-vampire-233029:4470602")
+	//implementation fg.deobf("curse.maven:ad-astra-635042:4452052")
+	//implementation fg.deobf("curse.maven:resourceful-lib-570073:4434139")
+	//implementation fg.deobf("curse.maven:botarium-704113:4306551")
+	//implementation fg.deobf("curse.maven:resourceful-config-714059:4444198")
 }
 
 jar {

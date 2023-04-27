@@ -14,7 +14,7 @@ import net.minecraft.world.entity.npc.Villager;
 @Mixin(VillagerMakeLove.class)
 public class MixinVillagerMakeLove {
 	@Inject(method = "isBreedingPossible", at = @At("HEAD"), cancellable = true)
-	private void inject_isBreedingPossible(Villager villager, CallbackInfoReturnable<Boolean> callbackInfo) {
+	private void setBreedingImpossibleWithSameGender(Villager villager, CallbackInfoReturnable<Boolean> callbackInfo) {
 		var villagerBrain = villager.getBrain();
 		var optionalBreedTarget = villagerBrain.getMemory(MemoryModuleType.BREED_TARGET).filter(m -> m.getType() == EntityType.VILLAGER);
 

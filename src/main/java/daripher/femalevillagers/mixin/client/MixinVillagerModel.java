@@ -28,7 +28,7 @@ public class MixinVillagerModel implements ArmedModel {
 	protected ModelPart arms;
 
 	@Inject(method = "<init>(Lnet/minecraft/client/model/geom/ModelPart;)V", at = @At("TAIL"))
-	private void inject_constructor(ModelPart root, CallbackInfo callbackInfo) {
+	private void initArms(ModelPart root, CallbackInfo callbackInfo) {
 		try {
 			rightArm = root.getChild("right_arm");
 			leftArm = root.getChild("left_arm");
@@ -38,7 +38,7 @@ public class MixinVillagerModel implements ArmedModel {
 	}
 
 	@Inject(method = "createBodyModel", at = @At("RETURN"))
-	private static void inject_createBodyModel(CallbackInfoReturnable<MeshDefinition> callbackInfo) {
+	private static void createArms(CallbackInfoReturnable<MeshDefinition> callbackInfo) {
 		var model = callbackInfo.getReturnValue();
 		var root = model.getRoot();
 		var rightArm = root.addOrReplaceChild("right_arm", CubeListBuilder.create().texOffs(44, 22).addBox(-1.5F, -2.5F, -2F, 4F, 8F, 4F), PartPose.offsetAndRotation(-6.5F, 3F, 0F, -0.9599F, 0F, 0F));
@@ -62,7 +62,7 @@ public class MixinVillagerModel implements ArmedModel {
 	}
 
 	@Inject(method = "setupAnim", at = @At("TAIL"))
-	private void inject_setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo callbackInfo) {
+	private void setupArmsAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo callbackInfo) {
 		if (rightArm == null) {
 			return;
 		}
