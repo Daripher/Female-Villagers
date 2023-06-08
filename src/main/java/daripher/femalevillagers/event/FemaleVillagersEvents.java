@@ -32,20 +32,20 @@ public class FemaleVillagersEvents {
 		if (event.getEntity().getTags().contains("do_not_replace")) {
 			return;
 		}
-
-		if (event.getEntity().level.isClientSide || event.loadedFromDisk()) {
+		if (event.loadedFromDisk()) {
+			event.getEntity().getTags().add("do_not_replace");
 			return;
 		}
-
+		if (event.getEntity().level.isClientSide) {
+			return;
+		}
 		var level = event.getWorld();
 		var replaceChance = 0.5;
-
 		if (level.random.nextFloat() >= replaceChance) {
+			event.getEntity().getTags().add("do_not_replace");
 			return;
 		}
-
 		var replacementEntity = createReplacementEntity(event.getEntity());
-
 		if (replacementEntity != null) {
 			level.addFreshEntity(replacementEntity);
 			event.setCanceled(true);
