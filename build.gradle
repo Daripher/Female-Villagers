@@ -120,6 +120,7 @@ dependencies {
 	implementation fg.deobf("curse.maven:botarium-704113:4306551")
 	implementation fg.deobf("curse.maven:resourceful-config-714059:4444198")
 	implementation fg.deobf("curse.maven:carry-on-274259:4511204")
+	implementation fg.deobf("curse.maven:jade-324717:4433884")
 }
 
 jar {
