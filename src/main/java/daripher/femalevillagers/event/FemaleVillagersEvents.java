@@ -15,6 +15,7 @@ import daripher.femalevillagers.entity.FemaleZombieVillager;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.animal.horse.TraderLlama;
 import net.minecraft.world.entity.monster.Illusioner;
 import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.world.entity.monster.Vindicator;
@@ -78,6 +79,8 @@ public class FemaleVillagersEvents {
 
 		if (entity.getType() == EntityType.WANDERING_TRADER) {
 			replacementEntity = new FemaleWanderingTrader(entity.level);
+			final var llamaOwner = replacementEntity;
+			entity.level.getEntitiesOfClass(TraderLlama.class, entity.getBoundingBox().inflate(10D)).forEach(llama -> llama.setLeashedTo(llamaOwner, true));
 		}
 
 		if (entity.getType() == EntityType.PILLAGER) {
