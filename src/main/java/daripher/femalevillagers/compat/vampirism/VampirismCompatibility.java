@@ -1,7 +1,7 @@
 package daripher.femalevillagers.compat.vampirism;
 
 import daripher.femalevillagers.FemaleVillagersMod;
-import daripher.femalevillagers.client.render.FemaleVillagerRenderer;
+import daripher.femalevillagers.compat.vampirism.client.render.FemaleConvertedVIllagerRenderer;
 import daripher.femalevillagers.compat.vampirism.entity.FemaleConvertedVillager;
 import daripher.femalevillagers.init.EntityInit;
 import de.teamlapen.vampirism.api.VampirismAPI;
@@ -51,7 +51,7 @@ public enum VampirismCompatibility {
 	}
 
 	private void registerRenderer(FMLClientSetupEvent event) {
-		EntityRenderers.register(getFemaleConvertedVillagerEntityType(), ctx -> new FemaleVillagerRenderer(ctx, "vampirism/female_villager"));
+		EntityRenderers.register(getFemaleConvertedVillagerEntityType(), FemaleConvertedVIllagerRenderer::new);
 	}
 
 	@SuppressWarnings("unchecked")
