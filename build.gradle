@@ -21,7 +21,7 @@ plugins {
 
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.7'
+version = '1.7a'
 group = 'daripher.femalevillagers'
 archivesBaseName = 'FemaleVillagers-1.19.3'
 
