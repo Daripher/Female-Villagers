@@ -19,21 +19,9 @@ public class FemaleVillagersMod {
 	public FemaleVillagersMod() {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
 		EntityInit.REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
-
-		if (ModList.get().isLoaded("villagernames")) {
-			VillagerNamesCompatibility.INSTANCE.addCompatibility();
-		}
-
-		if (ModList.get().isLoaded("guardvillagers")) {
-			GuardVillagersCompatibility.INSTANCE.addCompatibility();
-		}
-
-		if (ModList.get().isLoaded("conjurer_illager")) {
-			TheConjurerCompatibility.INSTANCE.addCompatibility();
-		}
-
-		if (ModList.get().isLoaded("vampirism")) {
-			VampirismCompatibility.INSTANCE.addCompatibility();
-		}
+		if (ModList.get().isLoaded("villagernames")) VillagerNamesCompatibility.INSTANCE.addCompatibility();
+		if (ModList.get().isLoaded("guardvillagers")) GuardVillagersCompatibility.INSTANCE.addCompatibility();
+		if (ModList.get().isLoaded("conjurer_illager")) TheConjurerCompatibility.INSTANCE.addCompatibility();
+		if (ModList.get().isLoaded("vampirism")) VampirismCompatibility.INSTANCE.addCompatibility();
 	}
 }
